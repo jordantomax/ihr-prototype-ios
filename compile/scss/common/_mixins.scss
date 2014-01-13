@@ -161,10 +161,10 @@ $vender-prefixes: 'webkit', 'khtml', 'moz', 'ms';
     	-moz-linear-gradient($dir, $start-color, $end-color) 1 100%;
 }
 
-@mixin round( $radius: 5 ) {
-  -webkit-border-radius: #{$radius}px;
-  -moz-border-radius: #{$radius}px;
-  border-radius: #{$radius}px;
+@mixin round( $radius: 5px ) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
 }
 
 @mixin round-corner($horizontal, $vertical, $magnitude) {
@@ -190,10 +190,10 @@ $vender-prefixes: 'webkit', 'khtml', 'moz', 'ms';
     box-shadow: inset #{$horizontal}px #{$vertical}px #{$magnitude}px $color;
 }
 
-@mixin box-shadow($horizontal: 5, $vertical: 5, $magnitude: 5, $color: #888) {
-    -moz-box-shadow: #{$horizontal}px #{$vertical}px #{$magnitude}px $color;
-    -webkit-box-shadow: #{$horizontal}px #{$vertical}px #{$magnitude}px $color;
-    box-shadow: #{$horizontal}px #{$vertical}px #{$magnitude}px $color;
+@mixin box-shadow($horizontal: 5px, $vertical: 5px, $magnitude: 5px, $color: #888) {
+    -moz-box-shadow: #{$horizontal} #{$vertical} #{$magnitude} $color;
+    -webkit-box-shadow: #{$horizontal} #{$vertical} #{$magnitude} $color;
+    box-shadow: #{$horizontal} #{$vertical} #{$magnitude} $color;
 }
 
 @mixin box-shadow-none {

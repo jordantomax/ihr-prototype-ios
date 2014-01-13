@@ -2,3 +2,24 @@
   margin: 35px auto 30px;
   display: block;
 }
+
+#p-genre-footer {
+  position: fixed;
+  z-index: 11;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  font-size: 18px;
+  background-color: rgba($white, 0.9);
+
+  .space {
+    padding: $padding-x;
+    @include group;
+  }
+}
+
+.p-genre-footer-link {
+  padding: $ui-btn-padding 0;
+  float: left;
+  display: block;
+}

@@ -32,7 +32,7 @@ body {
   margin: 0;
   background-color: #900e1a;
   min-height: 100%;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 /* line 12, ../../compile/scss/common/_base.scss */
@@ -69,9 +69,28 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
 }
 
+/* line 5, ../../compile/scss/common/_position.scss */
+.p-right {
+  float: right;
+}
+
 /* line 1, ../../compile/scss/common/_global.scss */
 .logo {
   margin: 0 auto;
+}
+
+/* line 1, ../../compile/scss/common/_ui.scss */
+.ui-btn {
+  font-size: 16px;
+  color: white;
+  background-color: #00aef8;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  padding: 10px;
 }
 
 /* line 1, ../../compile/scss/modules/_genres.scss */
@@ -94,22 +113,19 @@ h1, h2, h3, h4, h5, h6 {
 .m-genre-tiles.checked img {
   opacity: 0.2;
 }
-/* line 12, ../../compile/scss/modules/_genres.scss */
-.m-genre-tiles.checked .checked {
-  position: relative;
-}
-/* line 15, ../../compile/scss/modules/_genres.scss */
+/* line 14, ../../compile/scss/modules/_genres.scss */
 .m-genre-tiles.checked .checked:before {
   opacity: 1;
 }
-/* line 19, ../../compile/scss/modules/_genres.scss */
+/* line 18, ../../compile/scss/modules/_genres.scss */
 .m-genre-tiles.checked .checked img {
   opacity: 1;
 }
-/* line 25, ../../compile/scss/modules/_genres.scss */
+/* line 24, ../../compile/scss/modules/_genres.scss */
 .m-genre-tiles li {
   float: left;
   width: 50%;
+  position: relative;
 }
 /* line 29, ../../compile/scss/modules/_genres.scss */
 .m-genre-tiles li:before {
@@ -166,5 +182,38 @@ h1, h2, h3, h4, h5, h6 {
 /* line 1, ../../compile/scss/pages/_genres.scss */
 #p-genre-logo {
   margin: 35px auto 30px;
+  display: block;
+}
+
+/* line 6, ../../compile/scss/pages/_genres.scss */
+#p-genre-footer {
+  position: fixed;
+  z-index: 11;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  font-size: 18px;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+/* line 15, ../../compile/scss/pages/_genres.scss */
+#p-genre-footer .space {
+  padding: 15px;
+  min-height: 1px;
+}
+/* line 4, ../../compile/scss/common/_mixins.scss */
+#p-genre-footer .space:after {
+  content: ".";
+  display: block;
+  height: 0;
+  line-height: 0;
+  font-size: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+/* line 21, ../../compile/scss/pages/_genres.scss */
+.p-genre-footer-link {
+  padding: 10px 0;
+  float: left;
   display: block;
 }

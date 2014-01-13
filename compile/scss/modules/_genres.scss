@@ -10,7 +10,6 @@
     }
 
     .checked {
-      position: relative;
 
       &:before {
         opacity: 1;
@@ -25,6 +24,7 @@
   li {
     float: left;
     width: 50%;
+    position: relative;
 
     &:before {
       $size: 26px;
@@ -41,7 +41,7 @@
       background-repeat: no-repeat;
       background-position: center;
       background-color: $white;
-      @include round(50);
+      @include round(50px);
       opacity: 0;
       @include transition(opacity);
       z-index: 10;
