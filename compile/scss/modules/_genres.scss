@@ -1,0 +1,33 @@
+.m-genre-tiles {
+  $space: 10px;
+  margin-left: -#{$space};
+  @include group;
+  padding: 0 15px;
+
+  li {
+    float: left;
+    width: 50%;
+  }
+
+  .space {
+    margin: $space;
+    margin-top: 0;
+    margin-right: 0;
+    position: relative;
+  }
+
+
+  .name {
+    position: absolute;
+    color: #fff;
+    bottom: $space*0.75;
+    left: $space*0.75;
+    font-size: 18px;
+    text-transform: capitalize;
+    font-weight: 100;
+  }
+
+  img {
+    display: block;
+  }
+}

@@ -1,0 +1,2 @@
+$ ->
+  router = new app.Router

@@ -1,0 +1,98 @@
+/* line 1, ../../compile/scss/common/_type.scss */
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* line 1, ../../compile/scss/common/_layout.scss */
+.l-wrapper {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* line 1, ../../compile/scss/common/_base.scss */
+html {
+  height: 100%;
+}
+
+/* line 5, ../../compile/scss/common/_base.scss */
+body {
+  margin: 0;
+  background-color: #900e1a;
+  min-height: 100%;
+  overflow: scroll;
+}
+
+/* line 12, ../../compile/scss/common/_base.scss */
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+/* line 17, ../../compile/scss/common/_base.scss */
+li {
+  list-style: none;
+  margin: 0;
+}
+
+/* line 22, ../../compile/scss/common/_base.scss */
+img {
+  max-width: 100%;
+}
+
+/* line 26, ../../compile/scss/common/_base.scss */
+template {
+  display: none;
+}
+
+/* line 30, ../../compile/scss/common/_base.scss */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  font-size: 1em;
+  margin-top: 0;
+}
+
+/* line 1, ../../compile/scss/common/_position.scss */
+.p-relative {
+  position: relative;
+}
+
+/* line 1, ../../compile/scss/modules/_genres.scss */
+.m-genre-tiles {
+  margin-left: -10px;
+  min-height: 1px;
+  padding: 0 15px;
+}
+/* line 4, ../../compile/scss/common/_mixins.scss */
+.m-genre-tiles:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+/* line 7, ../../compile/scss/modules/_genres.scss */
+.m-genre-tiles li {
+  float: left;
+  width: 50%;
+}
+/* line 12, ../../compile/scss/modules/_genres.scss */
+.m-genre-tiles .space {
+  margin: 10px;
+  margin-top: 0;
+  margin-right: 0;
+  position: relative;
+}
+/* line 20, ../../compile/scss/modules/_genres.scss */
+.m-genre-tiles .name {
+  position: absolute;
+  color: #fff;
+  bottom: 7.5px;
+  left: 7.5px;
+  font-size: 18px;
+  text-transform: capitalize;
+  font-weight: 100;
+}
+/* line 30, ../../compile/scss/modules/_genres.scss */
+.m-genre-tiles img {
+  display: block;
+}
