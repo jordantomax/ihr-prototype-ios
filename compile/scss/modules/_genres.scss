@@ -4,9 +4,44 @@
   @include group;
   padding: 0 15px;
 
+  &.checked {
+    img {
+      opacity: 0.2;
+    }
+
+    .checked {
+      position: relative;
+
+      &:before {
+        $size: 26px;
+        content: '';
+        position: absolute;
+        @include dim($size);
+        top: 0;
+        right: 0;
+        margin: -#{$size/2};
+        margin-right: 0;
+        margin-bottom: 0;
+        background-image: url('../img/check-blue.png');
+        background-size: 16px 16px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-color: $white;
+        @include round(50);
+      }
+
+      img {
+        opacity: 1;
+      }
+    }
+  }
+
   li {
     float: left;
     width: 50%;
+
+    &.checked {
+    }
   }
 
   .space {
@@ -29,5 +64,6 @@
 
   img {
     display: block;
+    @include transition(opacity);
   }
 }

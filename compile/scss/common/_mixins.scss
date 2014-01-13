@@ -2,151 +2,252 @@
     min-height: 1px;
 
     &:after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
+		content: ".";
+		display: block;
+		height: 0;
+		line-height: 0;
+		font-size: 0;
+		clear: both;
+		visibility: hidden;
     }
 }
 
-@mixin round($amount) {
-  border-radius: $amount;
-  -moz-border-radius: $amount;
-  -webkit-border-radius: $amount;
-}
-
-@mixin dim($width, $height: $width) {
-  height: $height;
-  width: $width;
-}
-
-@mixin transition($transition-property, $transition-time: 0.1s, $method: ease-in-out) {
-  -webkit-transition: $transition-property $transition-time $method;
-  -moz-transition: $transition-property $transition-time $method;
-  -ms-transition: $transition-property $transition-time $method;
-  -o-transition: $transition-property $transition-time $method;
-  transition: $transition-property $transition-time $method;
-}
-
-@mixin box-shadow($top, $left, $blur, $color, $inset: false) {
-  @if $inset {
-    -webkit-box-shadow:inset $top $left $blur $color;
-    -moz-box-shadow:inset $top $left $blur $color;
-    box-shadow:inset $top $left $blur $color;
-  } @else {
-    -webkit-box-shadow: $top $left $blur $color;
-    -moz-box-shadow: $top $left $blur $color;
-    box-shadow: $top $left $blur $color;
-  }
-}
-
-@mixin rotate($deg) {
-  -webkit-transform:rotate($deg);
-}
-
-// Horizontal gradient, from left to right
-//
-// Creates two color stops, start and end, by specifying a color and position for each color stop.
-// Color stops are not available in IE9 and below.
-@mixin gradient-horizontal($start-color: #555, $end-color: #333, $start-percent: 0%, $end-percent: 100%) {
-  background-image: -webkit-linear-gradient(left, color-stop($start-color $start-percent), color-stop($end-color $end-percent)); // Safari 5.1-6, Chrome 10+
-  background-image:  linear-gradient(to right, $start-color $start-percent, $end-color $end-percent); // Standard, IE10, Firefox 16+, Opera 12.10+, Safari 7+, Chrome 26+
-  background-repeat: repeat-x;
-}
-
-// Vertical gradient, from top to bottom
-//
-// Creates two color stops, start and end, by specifying a color and position for each color stop.
-// Color stops are not available in IE9 and below.
-@mixin gradient-vertical($start-color: #555, $end-color: #333, $start-percent: 0%, $end-percent: 100%) {
-  background-image: -webkit-linear-gradient(top, $start-color $start-percent, $end-color $end-percent);  // Safari 5.1-6, Chrome 10+
-   background-image: linear-gradient(to bottom, $start-color $start-percent, $end-color $end-percent); // Standard, IE10, Firefox 16+, Opera 12.10+, Safari 7+, Chrome 26+
-  background-repeat: repeat-x;
-}
-
-@mixin ghost-center-y {
-  &:before {
-    content: '';
+@mixin inline-block($align: '') {
+	display:-moz-inline-stack;
     display: inline-block;
-    height: 100%;
-    vertical-align: middle;
-    margin-right: -0.25em;
-  }
+    *display: inline;
+    *zoom: 1;
+	@if $align != '' {
+		vertical-align: $align;
+	}
 }
 
-@mixin sp-css {
-	background-repeat: no-repeat;
+@mixin ellipsis() {
+	text-overflow: ellipsis;
+	display: block;
 	overflow: hidden;
-	line-height: 0;
-	font-size: 0;
-	text-indent: 100%;
-	border: 0;
+	white-space: nowrap;
 }
 
-@mixin sp-center($sprite, $image, $dir: '') {
+@mixin dim($x, $y: $x) {
+	width: #{$x};
+	height: #{$y};
+}
+
+@mixin list {
+	@include group;
+
+	> li {
+		float: left;
+	}
+}
+
+@mixin stretch {
 	position: absolute;
-	@if ($dir == x) {
-		left: 50%;
-		margin-left: -#{sp-width($sprite, $image)/2};
-	} @else if ($dir == y) {
-		top: 50%;
-		margin-top: -#{sp-height($sprite, $image)/2};
-	} @else {
-		top: 50%;
-		left: 50%;
-		margin-top: -#{sp-height($sprite, $image)/2};
-		margin-left: -#{sp-width($sprite, $image)/2};
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: 0;
+}
+
+@mixin oneline($height) {
+	line-height: $height;
+	height: $height;
+}
+
+@mixin mask($opacity: 0.5) {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	opacity: $opacity;
+	z-index: 100;
+}
+
+$vender-prefixes: 'webkit', 'khtml', 'moz', 'ms';
+
+@mixin vendor($prop, $value) {
+	@each $prefix in $vender-prefixes {
+		-#{$prefix}-#{$prop}: $value;
+	}
+	#{$prop}: $value;
+}
+
+@mixin vendorValue($prop, $value) {
+	@each $prefix in $vender-prefixes {
+		#{$prop}: -#{$prefix}-#{$value};
+	}
+	#{$prop}: #{$value};
+}
+
+// triangle
+@mixin triangle( $size: 7px, $position: "bottom", $color: #999 ) {
+    height: 0;
+    width: 0;
+    border-style: solid;
+    border-width: $size;
+    @if $position == "bottom" {
+        border-color : transparent transparent $color transparent;
+    }
+    @if $position == "top" {
+        border-color :  $color transparent transparent transparent;
+    }
+    @if $position == "left" {
+        border-color : transparent transparent transparent $color;
+    }
+    @if $position == "right" {
+        border-color : transparent $color transparent transparent;
+    }
+}
+
+
+// dotted borders
+@mixin dotted-y($position) {
+    background-image: url($bg + "dotted-y.png");
+    background-repeat: repeat-y;
+    background-position: $position top;
+}
+
+@mixin dotted-x( $position ) {
+    background-image: url($bg + "dotted-x.png");
+    background-repeat: repeat-x;
+    background-position: left $position;
+}
+
+// css3
+@mixin box-sizing( $property: "border-box" ) {
+    -webkit-box-sizing: $property;
+    -moz-box-sizing: $property;
+    box-sizing: $property;
+}
+
+@mixin linear-gradient($start-color: #222, $end-color: #000, $imageUrl: '') {
+	background-color: $end-color;
+	@if $imageUrl == '' {
+	   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from($start-color), to($end-color));
+	   background-image: -webkit-linear-gradient(top, $start-color, $end-color);
+	   background-image: -moz-linear-gradient(top, $start-color, $end-color);
+	   background-image: -ms-linear-gradient(top, $start-color, $end-color);
+	   background-image: -o-linear-gradient(top, $start-color, $end-color);
+	}
+	@else {
+	   background-image: url($imageUrl), -webkit-gradient(linear, 0% 0%, 0% 100%, from($start-color), to($end-color));
+	   background-image: url($imageUrl), -webkit-linear-gradient(top, $start-color, $end-color);
+	   background-image: url($imageUrl), -moz-linear-gradient(top, $start-color, $end-color);
+	   background-image: url($imageUrl), -ms-linear-gradient(top, $start-color, $end-color);
+	   background-image: url($imageUrl), -o-linear-gradient(top, $start-color, $end-color);
+	}
+
+}
+
+@mixin linear-gradient-diagonal($angle, $start-color, $end-color) {
+	background-color: $end-color;
+	background-image: -webkit-linear-gradient(#{$angle}deg, $start-color, $end-color);
+	background-image: -moz-linear-gradient(#{$angle}deg, $start-color, $end-color);
+	background-image: -ms-linear-gradient(#{$angle}deg, $start-color, $end-color);
+	background-image: -o-linear-gradient(#{$angle}deg, $start-color, $end-color);
+}
+
+@mixin border-gradient($dir, $start-color, $end-color, $width: 1px) {
+	border-width: $width;
+    -webkit-border-image:
+    	-webkit-gradient(linear, 0 100%, 0 0, from($start-color), to($end-color)) 1 100%;
+    -webkit-border-image:
+    	-webkit-linear-gradient($dir, $start-color, $end-color) 1 100%;
+    -o-border-image:
+    	-o-linear-gradient($dir, $start-color, $end-color) 1 100%;
+    -moz-border-image:
+    	-moz-linear-gradient($dir, $start-color, $end-color) 1 100%;
+}
+
+@mixin round( $radius: 5 ) {
+  -webkit-border-radius: #{$radius}px;
+  -moz-border-radius: #{$radius}px;
+  border-radius: #{$radius}px;
+}
+
+@mixin round-corner($horizontal, $vertical, $magnitude) {
+  border-#{$vertical}-#{$horizontal}-radius: #{$magnitude}px;
+  -moz-border-radius-#{$vertical}#{$horizontal}: #{$magnitude}px;
+  -webkit-border-#{$vertical}-#{$horizontal}-radius: #{$magnitude}px;
+}
+
+@mixin text-shadow($horizontal: 1, $vertical: 1, $magnitude: 1, $color: #888) {
+   text-shadow: #{$horizontal}px #{$vertical}px #{$magnitude}px $color;
+}
+
+@mixin transition($property, $time: 0.15) {
+    -webkit-transition: $property #{$time}s ease-in-out;
+    -moz-transition: $property #{$time}s ease-in-out;
+    -o-transition: $property #{$time}s ease-in-out;
+    transition: $property #{$time}s ease-in-out;
+}
+
+@mixin inner-shadow($horizontal: 5, $vertical: 5, $magnitude: 5, $color: #888) {
+    -moz-box-shadow: inset #{$horizontal}px #{$vertical}px #{$magnitude}px $color;
+    -webkit-box-shadow: inset #{$horizontal}px #{$vertical}px #{$magnitude}px $color;
+    box-shadow: inset #{$horizontal}px #{$vertical}px #{$magnitude}px $color;
+}
+
+@mixin box-shadow($horizontal: 5, $vertical: 5, $magnitude: 5, $color: #888) {
+    -moz-box-shadow: #{$horizontal}px #{$vertical}px #{$magnitude}px $color;
+    -webkit-box-shadow: #{$horizontal}px #{$vertical}px #{$magnitude}px $color;
+    box-shadow: #{$horizontal}px #{$vertical}px #{$magnitude}px $color;
+}
+
+@mixin box-shadow-none {
+  @include vendor(box-shadow, none);
+}
+
+@mixin dotted-y($position, $color: '') {
+    background-image: url("/assets/img/site/dotted-y.png");
+    background-repeat: repeat-y;
+    background-position: $position top;
+	@if $color != '' {
+		background-image: url("/assets/img/site/dotted-y-#{$color}.png");
 	}
 }
 
-// http://compass-style.org/reference/compass/helpers/sprites/
-@mixin get-sprite($map, $sprite, $css: true, $repeat: no-repeat, $height: true, $width: true) {
-	$sprite-layout: smart;
-
-	//http://compass-style.org/reference/compass/helpers/sprites/#sprite-file
-	$sprite-image: sprite-file($map, $sprite);
-
-	// http://compass-style.org/reference/compass/helpers/sprites/#sprite-url
-	$sprite-map: sprite-url($map);
-
-	// http://compass-style.org/reference/compass/helpers/sprites/#sprite-position
-	$sprite-position: sprite-position($map, $sprite);
-
-	background: $sprite-map $sprite-position $repeat;
-
-	// http://compass-style.org/reference/compass/helpers/image-dimensions/
-	@if ($height == true) {
-		$sprite-height: image-height($sprite-image);
-		height: $sprite-height;
-	}
-
-	// http://compass-style.org/reference/compass/helpers/image-dimensions/
-	@if ($width == true) {
-		$sprite-width: image-width($sprite-image);
-		width: $sprite-width;
-	}
-
-	@if ($css == true) {
-		@include sp-css;
+@mixin dotted-x( $position, $color: '' ) {
+    background-image: url("/assets/img/site/dotted-x.png");
+    background-repeat: repeat-x;
+    background-position: left $position;
+	@if $color != '' {
+		background-image: url("/assets/img/site/dotted-y-#{$color}.png");
 	}
 }
 
-@mixin sp($family, $sprite, $css: true) {
-  @include get-sprite(sprite-map('sp-#{$family}/*.png'), $sprite, $css);
-
-  background-size: sp-width($family, $sprite)/2 sp-height($family, $sprite)/2;
-
-  @media only screen and (-webkit-min-device-pixel-ratio: 2),
-only screen and (min-device-pixel-ratio: 2) {
-    background-size: sp-width($family, $sprite) sp-height($family, $sprite);
-  }
+@mixin dotted($x, $y) {
+	background-image: url($x), url($y), url($x), url($y);
+	background-position: left top, top right, left bottom, top left;
+	background-repeat: repeat-x, repeat-y, repeat-x, repeat-y;
 }
 
-@function sp-height($family, $name) {
-	@return image-height(sprite-file(sprite-map("sp-#{$family}/*.png"), $name));
+//For mobile-first approach
+@mixin break-min($breakpoint) {
+	@media only screen and (min-width: $breakpoint + px) { @content; }
 }
 
-@function sp-width($family, $name) {
-	@return image-width(sprite-file(sprite-map("sp-#{$family}/*.png"), $name));
+//For desktop-first approach
+@mixin break-max($breakpoint) {
+	@media only screen and (max-width: $breakpoint + px) { @content; }
+}
+
+@mixin placeholder() {
+	&::-webkit-input-placeholder {
+		@content
+	}
+
+	&:-moz-placeholder { /* Firefox 18- */
+		@content
+	}
+
+	&::-moz-placeholder {  /* Firefox 19+ */
+		@content
+	}
+
+	&:-ms-input-placeholder {
+		@content
+	}
 }

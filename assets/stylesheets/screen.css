@@ -3,6 +3,19 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
+/* line 5, ../../compile/scss/common/_type.scss */
+.t-h1 {
+  font-size: 18px;
+  line-height: 21px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* line 12, ../../compile/scss/common/_type.scss */
+.t-white {
+  color: white;
+}
+
 /* line 1, ../../compile/scss/common/_layout.scss */
 .l-wrapper {
   max-width: 640px;
@@ -56,6 +69,11 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
 }
 
+/* line 1, ../../compile/scss/common/_global.scss */
+.logo {
+  margin: 0 auto;
+}
+
 /* line 1, ../../compile/scss/modules/_genres.scss */
 .m-genre-tiles {
   margin-left: -10px;
@@ -67,22 +85,56 @@ h1, h2, h3, h4, h5, h6 {
   content: ".";
   display: block;
   height: 0;
+  line-height: 0;
+  font-size: 0;
   clear: both;
   visibility: hidden;
 }
-/* line 7, ../../compile/scss/modules/_genres.scss */
+/* line 8, ../../compile/scss/modules/_genres.scss */
+.m-genre-tiles.checked img {
+  opacity: 0.2;
+}
+/* line 12, ../../compile/scss/modules/_genres.scss */
+.m-genre-tiles.checked .checked {
+  position: relative;
+}
+/* line 15, ../../compile/scss/modules/_genres.scss */
+.m-genre-tiles.checked .checked:before {
+  content: '';
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  top: 0;
+  right: 0;
+  margin: -13px;
+  margin-right: 0;
+  margin-bottom: 0;
+  background-image: url("../img/check-blue.png");
+  background-size: 16px 16px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: white;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+}
+/* line 33, ../../compile/scss/modules/_genres.scss */
+.m-genre-tiles.checked .checked img {
+  opacity: 1;
+}
+/* line 39, ../../compile/scss/modules/_genres.scss */
 .m-genre-tiles li {
   float: left;
   width: 50%;
 }
-/* line 12, ../../compile/scss/modules/_genres.scss */
+/* line 47, ../../compile/scss/modules/_genres.scss */
 .m-genre-tiles .space {
   margin: 10px;
   margin-top: 0;
   margin-right: 0;
   position: relative;
 }
-/* line 20, ../../compile/scss/modules/_genres.scss */
+/* line 55, ../../compile/scss/modules/_genres.scss */
 .m-genre-tiles .name {
   position: absolute;
   color: #fff;
@@ -92,7 +144,17 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: capitalize;
   font-weight: 100;
 }
-/* line 30, ../../compile/scss/modules/_genres.scss */
+/* line 65, ../../compile/scss/modules/_genres.scss */
 .m-genre-tiles img {
+  display: block;
+  -webkit-transition: opacity 0.15s ease-in-out;
+  -moz-transition: opacity 0.15s ease-in-out;
+  -o-transition: opacity 0.15s ease-in-out;
+  transition: opacity 0.15s ease-in-out;
+}
+
+/* line 1, ../../compile/scss/pages/_genres.scss */
+#p-genre-logo {
+  margin: 35px auto 30px;
   display: block;
 }

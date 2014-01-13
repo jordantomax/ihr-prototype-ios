@@ -23,8 +23,10 @@ class app.Router
     '*genres': 'genres'
 
   genres: ->
-    _.each genres, (el, i) ->
-      genreModel = new app.GenreModel el
-      genreTile = new app.GenreTile model: genreModel
+    genres = new app.Genres
+    genres.reset genresData
+
+    genres.each (model) ->
+      genreTile = new app.GenreTile model: model
       $('#genres').append(genreTile.render())
 

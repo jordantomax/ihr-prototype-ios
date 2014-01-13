@@ -3477,12 +3477,12 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 
   genreNames = ['top 40 & pop', 'country', 'hip hop', 'r & b', 'alternative', 'rock', 'news & talk', 'sports', 'religious', 'spanish', 'dance', 'oldies', 'classic rock', 'mix & variety', 'soft rock', 'jazz', 'classical', 'personalities', 'comedy', 'international', 'college radio', 'reggae & island'];
 
-  window.genres = [];
+  window.genresData = [];
 
   _.each(genreNames, function(el, i) {
     var formattedName;
     formattedName = el.replace(/[^\w\s]/gi, '').replace(/\s\s/g, ' ').replace(/\s/g, '-');
-    return window.genres.push({
+    return window.genresData.push({
       name: el,
       src: 'assets/img/genres/' + formattedName + '.jpg'
     });
@@ -3491,32 +3491,46 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 }).call(this);
 
 (function() {
-  var _ref, _ref1,
+  var _ref, _ref1, _ref2,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  app.GenreModel = (function(_super) {
-    __extends(GenreModel, _super);
+  app.Genre = (function(_super) {
+    __extends(Genre, _super);
 
-    function GenreModel() {
-      _ref = GenreModel.__super__.constructor.apply(this, arguments);
+    function Genre() {
+      _ref = Genre.__super__.constructor.apply(this, arguments);
       return _ref;
     }
 
-    GenreModel.prototype.defaults = {
+    Genre.prototype.defaults = {
       checked: false
     };
 
-    return GenreModel;
+    return Genre;
 
   })(Backbone.Model);
+
+  app.Genres = (function(_super) {
+    __extends(Genres, _super);
+
+    function Genres() {
+      _ref1 = Genres.__super__.constructor.apply(this, arguments);
+      return _ref1;
+    }
+
+    Genres.prototype.model = app.Genre;
+
+    return Genres;
+
+  })(Backbone.Collection);
 
   app.GenreTile = (function(_super) {
     __extends(GenreTile, _super);
 
     function GenreTile() {
-      _ref1 = GenreTile.__super__.constructor.apply(this, arguments);
-      return _ref1;
+      _ref2 = GenreTile.__super__.constructor.apply(this, arguments);
+      return _ref2;
     }
 
     GenreTile.prototype.tagName = 'li';
@@ -3537,6 +3551,10 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     };
 
     GenreTile.prototype.check = function() {
+      if (!this.model.collection.checked) {
+        this.model.collection.checked = true;
+        this.$el.closest('ul').addClass('checked');
+      }
       this.model.checked = !this.model.checked;
       return this.$el.toggleClass('checked');
     };
@@ -3572,11 +3590,13 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     };
 
     Router.prototype.genres = function() {
-      return _.each(genres, function(el, i) {
-        var genreModel, genreTile;
-        genreModel = new app.GenreModel(el);
+      var genres;
+      genres = new app.Genres;
+      genres.reset(genresData);
+      return genres.each(function(model) {
+        var genreTile;
         genreTile = new app.GenreTile({
-          model: genreModel
+          model: model
         });
         return $('#genres').append(genreTile.render());
       });

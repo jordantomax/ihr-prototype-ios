@@ -1,6 +1,9 @@
-class app.GenreModel extends Backbone.Model
+class app.Genre extends Backbone.Model
   defaults:
     checked: false
+
+class app.Genres extends Backbone.Collection
+  model: app.Genre
 
 class app.GenreTile extends Backbone.View
   tagName: 'li'
@@ -17,6 +20,9 @@ class app.GenreTile extends Backbone.View
     'click': 'check'
 
   check: ->
+    if !@model.collection.checked
+      @model.collection.checked = true
+      @$el.closest('ul').addClass('checked')
+
     @model.checked = !@model.checked
     @$el.toggleClass 'checked'
-
