@@ -13,21 +13,7 @@
       position: relative;
 
       &:before {
-        $size: 26px;
-        content: '';
-        position: absolute;
-        @include dim($size);
-        top: 0;
-        right: 0;
-        margin: -#{$size/2};
-        margin-right: 0;
-        margin-bottom: 0;
-        background-image: url('../img/check-blue.png');
-        background-size: 16px 16px;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-color: $white;
-        @include round(50);
+        opacity: 1;
       }
 
       img {
@@ -40,7 +26,25 @@
     float: left;
     width: 50%;
 
-    &.checked {
+    &:before {
+      $size: 26px;
+      content: '';
+      position: absolute;
+      @include dim($size);
+      top: 0;
+      right: 0;
+      margin: -#{$size/2};
+      margin-right: 0;
+      margin-bottom: 0;
+      background-image: url('../img/check-blue.png');
+      background-size: 16px 16px;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: $white;
+      @include round(50);
+      opacity: 0;
+      @include transition(opacity);
+      z-index: 10;
     }
   }
 
