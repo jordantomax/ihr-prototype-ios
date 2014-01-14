@@ -24,5 +24,5 @@ class app.GenreTile extends Backbone.View
       @model.collection.checked = true
       @$el.closest('ul').addClass('checked')
 
-    @model.checked = !@model.checked
+    @model.set('checked', !@model.get('checked'))
     @$el.toggleClass 'checked'

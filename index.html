@@ -7,7 +7,7 @@
 
   <body>
     <div class="l-wrapper">
-      <div class="p-genre-select">
+      <div id="p-genres">
         <header>
           <img id="p-genre-logo" src="assets/img/logo-genres.png" />
           <h1 class="t-h1 t-white">What do you like to listen to?<br>Select your favorite genres.</h1>
@@ -18,9 +18,13 @@
         <footer id="p-genre-footer">
           <div class="space">
             <a class="p-genre-footer-link">Sign In</a>
-            <a class="ui-btn p-right">Continue</a>
+            <a class="ui-btn p-right" id="go-to-stations">Continue</a>
           </div>
         </footer>
+      </div>
+
+      <div id="p-stations" style="display: none;">
+        <ul id="m-station-rows"></ul>
       </div>
     </div>
 

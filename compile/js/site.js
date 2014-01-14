@@ -72,20 +72,37 @@
 }).call(this);
 
 (function() {
-  var genreNames;
+  var genreNames, stationImgPath;
 
   genreNames = ['top 40 & pop', 'country', 'hip hop', 'r & b', 'alternative', 'rock', 'news & talk', 'sports', 'religious', 'spanish', 'dance', 'oldies', 'classic rock', 'mix & variety', 'soft rock', 'jazz', 'classical', 'personalities', 'comedy', 'international', 'college radio', 'reggae & island'];
 
   window.genresData = [];
+
+  stationImgPath = 'assets/img/stations/';
 
   _.each(genreNames, function(el, i) {
     var formattedName;
     formattedName = el.replace(/[^\w\s]/gi, '').replace(/\s\s/g, ' ').replace(/\s/g, '-');
     return window.genresData.push({
       name: el,
+      formattedName: formattedName,
       src: 'assets/img/genres/' + formattedName + '.jpg'
     });
   });
+
+  window.stationsData = [
+    {
+      name: "z100",
+      tagline: "New York's Hit Music Station",
+      imgSrc: stationImgPath + "z100.png",
+      genres: ["top-40-pop", "country", "news-talk"]
+    }, {
+      name: "106.7 Lite FM",
+      tagline: "New York's Christmas Station",
+      imgSrc: stationImgPath + "106.7-lite-fm.png",
+      genres: ["r-b", "alternative", "rock"]
+    }
+  ];
 
 }).call(this);
 
@@ -154,11 +171,69 @@
         this.model.collection.checked = true;
         this.$el.closest('ul').addClass('checked');
       }
-      this.model.checked = !this.model.checked;
+      this.model.set('checked', !this.model.get('checked'));
       return this.$el.toggleClass('checked');
     };
 
     return GenreTile;
+
+  })(Backbone.View);
+
+}).call(this);
+
+(function() {
+  var _ref, _ref1, _ref2,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  app.Station = (function(_super) {
+    __extends(Station, _super);
+
+    function Station() {
+      _ref = Station.__super__.constructor.apply(this, arguments);
+      return _ref;
+    }
+
+    return Station;
+
+  })(Backbone.Model);
+
+  app.Stations = (function(_super) {
+    __extends(Stations, _super);
+
+    function Stations() {
+      _ref1 = Stations.__super__.constructor.apply(this, arguments);
+      return _ref1;
+    }
+
+    Stations.prototype.model = app.Station;
+
+    return Stations;
+
+  })(Backbone.Collection);
+
+  app.StationRow = (function(_super) {
+    __extends(StationRow, _super);
+
+    function StationRow() {
+      _ref2 = StationRow.__super__.constructor.apply(this, arguments);
+      return _ref2;
+    }
+
+    StationRow.prototype.tagName = 'li';
+
+    StationRow.prototype["class"] = 'station-row';
+
+    StationRow.prototype.initialize = function() {};
+
+    StationRow.prototype.template = Handlebars.templates.stationRow;
+
+    StationRow.prototype.render = function() {
+      this.$el.html(this.template(this.model.toJSON()));
+      return this.el;
+    };
+
+    return StationRow;
 
   })(Backbone.View);
 
@@ -188,17 +263,67 @@
       '*genres': 'genres'
     };
 
+    Router.prototype.pages = ['genres', 'stations'];
+
+    Router.prototype.switchPages = function(newPage) {
+      _.each(this.pages, function(page) {
+        var $page;
+        $page = $('#p-' + page);
+        if ($page.is(':visible')) {
+          return $page.fadeOut();
+        }
+      });
+      return $('#p-' + newPage).fadeIn();
+    };
+
     Router.prototype.genres = function() {
-      var genres;
+      var genres, self;
+      self = this;
       genres = new app.Genres;
       genres.reset(genresData);
-      return genres.each(function(model) {
+      genres.each(function(model) {
         var genreTile;
         genreTile = new app.GenreTile({
           model: model
         });
         return $('#genres').append(genreTile.render());
       });
+      return $('#go-to-stations').on('click', function() {
+        var selectedGenres;
+        selectedGenres = [];
+        genres.each(function(model) {
+          if (model.get('checked') === true) {
+            return selectedGenres.push(model.get('formattedName'));
+          }
+        });
+        return self.stations(selectedGenres);
+      });
+    };
+
+    Router.prototype.stations = function(selectedGenres) {
+      var selectedStationsData, sortedStationsData, stations;
+      selectedStationsData = [];
+      sortedStationsData = [];
+      _.each(stationsData, function(station, i) {
+        var intersection;
+        intersection = _.intersection(station.genres, selectedGenres);
+        if (intersection.length > 0) {
+          station.genreMatches = intersection.length;
+          return selectedStationsData.push(station);
+        }
+      });
+      sortedStationsData = _.sortBy(selectedStationsData, function(station) {
+        return -1 * station.genreMatches;
+      });
+      stations = new app.Stations(sortedStationsData);
+      stations.each(function(model) {
+        var stationRow;
+        stationRow = new app.StationRow({
+          model: model
+        });
+        return $('#m-station-rows').append(stationRow.render());
+      });
+      return this.switchPages('stations');
     };
 
     return Router;

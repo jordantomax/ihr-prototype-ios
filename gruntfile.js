@@ -43,6 +43,7 @@ module.exports = function(grunt) {
                 coffeePath + 'jqueryPlugin.coffee',
                 coffeePath + 'data.coffee',
                 coffeePath + 'genre.coffee',
+                coffeePath + 'station.coffee',
                 coffeePath + 'router.coffee',
                 coffeePath + 'init.coffee'
               ]
