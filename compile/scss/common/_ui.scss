@@ -2,7 +2,18 @@
   font-size: 16px;
   color: $white;
   background-color: $blue;
-  @include round(5px);
   @include box-shadow(0, 1px, 1px, rgba($black, 0.2));
   padding: $ui-btn-padding;
+  text-align: center;
+  @include round(5px);
+}
+
+.ui-btn-bottom {
+  @extend .ui-btn;
+  background-color: $purple;
+  color: $white;
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
 }

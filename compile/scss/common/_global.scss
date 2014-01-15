@@ -1,3 +1,58 @@
-.logo {
+.g-app-header {
+  color: $white;
+  background-color: $red;
+}
+.g-app-capital {
+  padding: 13px 0;
+  border-bottom: 1px solid #6d0710;
+}
+
+.g-app-hamburger {
+  display: block;
+  background-image: url($img + 'hamburger.png');
+  background-size: 20px 15px;
+  position: absolute;
+  left: 15px;
+  @include dim(20px, 15px);
+}
+
+.g-app-logo {
   margin: 0 auto;
+  background-image: url($img + 'logo.png');
+  background-size: 144px 20px;
+  @include dim(144px, 20px);
+}
+
+.g-app-search {
+  padding: 0 5px 6px;
+  font-size: 14px;
+  line-height: 30px;
+  text-align: center;
+}
+
+.g-app-search-title {
+  margin: 0;
+}
+
+.g-app-search-input {
+  display: block;
+  width: 100%;
+  border: 0;
+  background: $white;
+  padding: 10px 0;
+  @include round(4px);
+  text-align: center;
+  font-size: 13px;
+}
+
+.g-app-tabs {
+  @include group;
+  font-size: 15px;
+  line-height: 44px;
+  border-bottom: 1px solid $red;
+  text-align: center;
+
+  li {
+    float: left;
+  }
 }

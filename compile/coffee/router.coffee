@@ -1,5 +1,7 @@
 class app.Router
   constructor: ->
+    self = @
+
     $(document).on 'click', "a[href^='/']", (event) ->
 
         href = $(event.currentTarget).attr('href')
@@ -19,6 +21,10 @@ class app.Router
 
     @genres()
 
+    _.each @pages, (page) ->
+      $('.route-' + page).on 'click', ->
+        self.switchPages page
+
   routes:
     '*genres': 'genres'
 
@@ -33,24 +39,26 @@ class app.Router
       if $page.is ':visible'
         $page.fadeOut()
     $('#p-' + newPage).fadeIn()
-
+    $('body').removeClass().addClass(newPage)
 
   genres: ->
     self = @;
-    genres = new app.Genres
-    genres.reset genresData
 
-    genres.each (model) ->
-      genreTile = new app.GenreTile model: model
-      $('#genres').append(genreTile.render())
+    if !app.genres
+      app.genres = new app.Genres
+      app.genres.reset genresData
 
-    $('#go-to-stations').on 'click', ->
-      selectedGenres = []
-      genres.each (model) ->
-        if model.get('checked') == true
-          selectedGenres.push(model.get('formattedName'))
+      app.genres.each (model) ->
+        genreTile = new app.GenreTile model: model
+        $('#genres').append(genreTile.render())
 
-      self.stations(selectedGenres)
+      $('#go-to-stations').on 'click', ->
+        selectedGenres = []
+        app.genres.each (model) ->
+          if model.get('checked') == true
+            selectedGenres.push(model.get('formattedName'))
+
+        self.stations(selectedGenres)
 
   stations: (selectedGenres) ->
     selectedStationsData = []
@@ -67,6 +75,7 @@ class app.Router
       -1 * station.genreMatches
 
     stations = new app.Stations sortedStationsData
+    $('#m-station-rows').empty()
     stations.each (model) ->
       stationRow = new app.StationRow model: model
       $('#m-station-rows').append(stationRow.render())

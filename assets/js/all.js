@@ -3407,19 +3407,19 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  buffer += "<img src=\"";
+  buffer += "<div class=\"img-wrapper\">\n  <img src=\"";
   if (stack1 = helpers.imgSrc) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.imgSrc; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\" />\n<h3>";
+    + "\" />\n</div>\n\n<div class=\"text-wrapper\">\n  <h3 class=\"name\">";
   if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</h3>\n<p>";
+    + "</h3>\n  <p class=\"tagline\">";
   if (stack1 = helpers.tagline) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.tagline; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</p>\n";
+    + "</p>\n</div>\n";
   return buffer;
   });;(function() {
   window.app = {};
@@ -3665,6 +3665,8 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 (function() {
   app.Router = (function() {
     function Router() {
+      var self;
+      self = this;
       $(document).on('click', "a[href^='/']", function(event) {
         var data, href, url;
         href = $(event.currentTarget).attr('href');
@@ -3680,6 +3682,11 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
         }
       });
       this.genres();
+      _.each(this.pages, function(page) {
+        return $('.route-' + page).on('click', function() {
+          return self.switchPages(page);
+        });
+      });
     }
 
     Router.prototype.routes = {
@@ -3696,31 +3703,34 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
           return $page.fadeOut();
         }
       });
-      return $('#p-' + newPage).fadeIn();
+      $('#p-' + newPage).fadeIn();
+      return $('body').removeClass().addClass(newPage);
     };
 
     Router.prototype.genres = function() {
-      var genres, self;
+      var self;
       self = this;
-      genres = new app.Genres;
-      genres.reset(genresData);
-      genres.each(function(model) {
-        var genreTile;
-        genreTile = new app.GenreTile({
-          model: model
+      if (!app.genres) {
+        app.genres = new app.Genres;
+        app.genres.reset(genresData);
+        app.genres.each(function(model) {
+          var genreTile;
+          genreTile = new app.GenreTile({
+            model: model
+          });
+          return $('#genres').append(genreTile.render());
         });
-        return $('#genres').append(genreTile.render());
-      });
-      return $('#go-to-stations').on('click', function() {
-        var selectedGenres;
-        selectedGenres = [];
-        genres.each(function(model) {
-          if (model.get('checked') === true) {
-            return selectedGenres.push(model.get('formattedName'));
-          }
+        return $('#go-to-stations').on('click', function() {
+          var selectedGenres;
+          selectedGenres = [];
+          app.genres.each(function(model) {
+            if (model.get('checked') === true) {
+              return selectedGenres.push(model.get('formattedName'));
+            }
+          });
+          return self.stations(selectedGenres);
         });
-        return self.stations(selectedGenres);
-      });
+      }
     };
 
     Router.prototype.stations = function(selectedGenres) {
@@ -3739,6 +3749,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
         return -1 * station.genreMatches;
       });
       stations = new app.Stations(sortedStationsData);
+      $('#m-station-rows').empty();
       stations.each(function(model) {
         var stationRow;
         stationRow = new app.StationRow({

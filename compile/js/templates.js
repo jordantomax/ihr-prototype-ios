@@ -25,18 +25,18 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  buffer += "<img src=\"";
+  buffer += "<div class=\"img-wrapper\">\n  <img src=\"";
   if (stack1 = helpers.imgSrc) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.imgSrc; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\" />\n<h3>";
+    + "\" />\n</div>\n\n<div class=\"text-wrapper\">\n  <h3 class=\"name\">";
   if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</h3>\n<p>";
+    + "</h3>\n  <p class=\"tagline\">";
   if (stack1 = helpers.tagline) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.tagline; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</p>\n";
+    + "</p>\n</div>\n";
   return buffer;
   });

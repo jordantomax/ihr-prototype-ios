@@ -242,6 +242,8 @@
 (function() {
   app.Router = (function() {
     function Router() {
+      var self;
+      self = this;
       $(document).on('click', "a[href^='/']", function(event) {
         var data, href, url;
         href = $(event.currentTarget).attr('href');
@@ -257,6 +259,11 @@
         }
       });
       this.genres();
+      _.each(this.pages, function(page) {
+        return $('.route-' + page).on('click', function() {
+          return self.switchPages(page);
+        });
+      });
     }
 
     Router.prototype.routes = {
@@ -273,31 +280,34 @@
           return $page.fadeOut();
         }
       });
-      return $('#p-' + newPage).fadeIn();
+      $('#p-' + newPage).fadeIn();
+      return $('body').removeClass().addClass(newPage);
     };
 
     Router.prototype.genres = function() {
-      var genres, self;
+      var self;
       self = this;
-      genres = new app.Genres;
-      genres.reset(genresData);
-      genres.each(function(model) {
-        var genreTile;
-        genreTile = new app.GenreTile({
-          model: model
+      if (!app.genres) {
+        app.genres = new app.Genres;
+        app.genres.reset(genresData);
+        app.genres.each(function(model) {
+          var genreTile;
+          genreTile = new app.GenreTile({
+            model: model
+          });
+          return $('#genres').append(genreTile.render());
         });
-        return $('#genres').append(genreTile.render());
-      });
-      return $('#go-to-stations').on('click', function() {
-        var selectedGenres;
-        selectedGenres = [];
-        genres.each(function(model) {
-          if (model.get('checked') === true) {
-            return selectedGenres.push(model.get('formattedName'));
-          }
+        return $('#go-to-stations').on('click', function() {
+          var selectedGenres;
+          selectedGenres = [];
+          app.genres.each(function(model) {
+            if (model.get('checked') === true) {
+              return selectedGenres.push(model.get('formattedName'));
+            }
+          });
+          return self.stations(selectedGenres);
         });
-        return self.stations(selectedGenres);
-      });
+      }
     };
 
     Router.prototype.stations = function(selectedGenres) {
@@ -316,6 +326,7 @@
         return -1 * station.genreMatches;
       });
       stations = new app.Stations(sortedStationsData);
+      $('#m-station-rows').empty();
       stations.each(function(model) {
         var stationRow;
         stationRow = new app.StationRow({
