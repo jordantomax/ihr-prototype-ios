@@ -1,5 +1,6 @@
 .l-wrapper {
-  max-width: 640px;
+  max-width: $device-width;
   margin: 0 auto;
   position: relative;
+  @include device-size;
 }

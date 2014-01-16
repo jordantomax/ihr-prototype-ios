@@ -1,6 +1,9 @@
 .g-app-header {
   color: $white;
   background-color: $red;
+  position: fixed;
+  width: $device-width;
+  margin: 0 auto;
 }
 .g-app-capital {
   padding: 13px 0;
@@ -55,4 +58,19 @@
   li {
     float: left;
   }
+}
+
+.g-app-content {
+  padding-top: 112px;
+}
+
+.g-app-drawer {
+  @include device-size;
+  position: fixed;
+  left: 50%;
+  margin-left: -#{$device-width/2};
+  top: 0;
+  background-image: url($img + 'drawer.jpg');
+  background-size: $device-width, 548px;
+  z-index: 9;
 }

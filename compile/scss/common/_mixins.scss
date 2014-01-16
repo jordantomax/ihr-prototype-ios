@@ -1,3 +1,8 @@
+@mixin device-size {
+  width: $device-width;
+  min-height: $device-height;
+}
+
 @mixin group {
     min-height: 1px;
 

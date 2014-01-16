@@ -18,9 +18,11 @@ body {
 
 /* line 1, ../../compile/scss/common/_layout.scss */
 .l-wrapper {
-  max-width: 640px;
+  max-width: 320px;
   margin: 0 auto;
   position: relative;
+  width: 320px;
+  min-height: 470px;
 }
 
 /* line 1, ../../compile/scss/common/_base.scss */
@@ -33,43 +35,42 @@ body {
   margin: 0;
   background-color: #900e1a;
   min-height: 100%;
-  overflow-y: scroll;
   -webkit-transition: background-color 0.15s ease-in-out;
   -moz-transition: background-color 0.15s ease-in-out;
   -o-transition: background-color 0.15s ease-in-out;
   transition: background-color 0.15s ease-in-out;
 }
 
-/* line 13, ../../compile/scss/common/_base.scss */
+/* line 12, ../../compile/scss/common/_base.scss */
 ul {
   padding: 0;
   margin: 0;
 }
 
-/* line 18, ../../compile/scss/common/_base.scss */
+/* line 17, ../../compile/scss/common/_base.scss */
 li {
   list-style: none;
   margin: 0;
 }
 
-/* line 23, ../../compile/scss/common/_base.scss */
+/* line 22, ../../compile/scss/common/_base.scss */
 img {
   max-width: 100%;
 }
 
-/* line 27, ../../compile/scss/common/_base.scss */
+/* line 26, ../../compile/scss/common/_base.scss */
 template {
   display: none;
 }
 
-/* line 31, ../../compile/scss/common/_base.scss */
+/* line 30, ../../compile/scss/common/_base.scss */
 h1, h2, h3, h4, h5, h6 {
   font-weight: normal;
   font-size: 1em;
   margin-top: 0;
 }
 
-/* line 37, ../../compile/scss/common/_base.scss */
+/* line 36, ../../compile/scss/common/_base.scss */
 p {
   margin-top: 0;
 }
@@ -88,15 +89,18 @@ p {
 .g-app-header {
   color: white;
   background-color: #900e1a;
+  position: fixed;
+  width: 320px;
+  margin: 0 auto;
 }
 
-/* line 5, ../../compile/scss/common/_global.scss */
+/* line 8, ../../compile/scss/common/_global.scss */
 .g-app-capital {
   padding: 13px 0;
   border-bottom: 1px solid #6d0710;
 }
 
-/* line 10, ../../compile/scss/common/_global.scss */
+/* line 13, ../../compile/scss/common/_global.scss */
 .g-app-hamburger {
   display: block;
   background-image: url("../img/hamburger.png");
@@ -107,7 +111,7 @@ p {
   height: 15px;
 }
 
-/* line 19, ../../compile/scss/common/_global.scss */
+/* line 22, ../../compile/scss/common/_global.scss */
 .g-app-logo {
   margin: 0 auto;
   background-image: url("../img/logo.png");
@@ -116,7 +120,7 @@ p {
   height: 20px;
 }
 
-/* line 26, ../../compile/scss/common/_global.scss */
+/* line 29, ../../compile/scss/common/_global.scss */
 .g-app-search {
   padding: 0 5px 6px;
   font-size: 14px;
@@ -124,12 +128,12 @@ p {
   text-align: center;
 }
 
-/* line 33, ../../compile/scss/common/_global.scss */
+/* line 36, ../../compile/scss/common/_global.scss */
 .g-app-search-title {
   margin: 0;
 }
 
-/* line 37, ../../compile/scss/common/_global.scss */
+/* line 40, ../../compile/scss/common/_global.scss */
 .g-app-search-input {
   display: block;
   width: 100%;
@@ -143,7 +147,7 @@ p {
   font-size: 13px;
 }
 
-/* line 48, ../../compile/scss/common/_global.scss */
+/* line 51, ../../compile/scss/common/_global.scss */
 .g-app-tabs {
   min-height: 1px;
   font-size: 15px;
@@ -151,7 +155,7 @@ p {
   border-bottom: 1px solid #900e1a;
   text-align: center;
 }
-/* line 4, ../../compile/scss/common/_mixins.scss */
+/* line 9, ../../compile/scss/common/_mixins.scss */
 .g-app-tabs:after {
   content: ".";
   display: block;
@@ -161,9 +165,27 @@ p {
   clear: both;
   visibility: hidden;
 }
-/* line 55, ../../compile/scss/common/_global.scss */
+/* line 58, ../../compile/scss/common/_global.scss */
 .g-app-tabs li {
   float: left;
+}
+
+/* line 63, ../../compile/scss/common/_global.scss */
+.g-app-content {
+  padding-top: 112px;
+}
+
+/* line 67, ../../compile/scss/common/_global.scss */
+.g-app-drawer {
+  width: 320px;
+  min-height: 470px;
+  position: fixed;
+  left: 50%;
+  margin-left: -160px;
+  top: 0;
+  background-image: url("../img/drawer.jpg");
+  background-size: 320px, 548px;
+  z-index: 9;
 }
 
 /* line 1, ../../compile/scss/common/_ui.scss */
@@ -197,7 +219,7 @@ p {
   min-height: 1px;
   padding: 0 15px;
 }
-/* line 4, ../../compile/scss/common/_mixins.scss */
+/* line 9, ../../compile/scss/common/_mixins.scss */
 .m-genre-tiles:after {
   content: ".";
   display: block;
@@ -305,13 +327,27 @@ p {
   margin: 0;
 }
 
+/* line 1, ../../compile/scss/pages/_all.scss */
+.p {
+  z-index: 10;
+  position: relative;
+  width: 320px;
+  min-height: 470px;
+}
+
 /* line 1, ../../compile/scss/pages/_genres.scss */
+#p-genres {
+  background-color: #900e1a;
+  padding-top: 35px;
+}
+
+/* line 5, ../../compile/scss/pages/_genres.scss */
 #p-genre-logo {
-  margin: 35px auto 30px;
+  margin: 0 auto 30px;
   display: block;
 }
 
-/* line 6, ../../compile/scss/pages/_genres.scss */
+/* line 10, ../../compile/scss/pages/_genres.scss */
 #p-genre-footer {
   position: fixed;
   z-index: 11;
@@ -321,12 +357,12 @@ p {
   font-size: 18px;
   background-color: rgba(255, 255, 255, 0.9);
 }
-/* line 15, ../../compile/scss/pages/_genres.scss */
+/* line 19, ../../compile/scss/pages/_genres.scss */
 #p-genre-footer .space {
   padding: 15px;
   min-height: 1px;
 }
-/* line 4, ../../compile/scss/common/_mixins.scss */
+/* line 9, ../../compile/scss/common/_mixins.scss */
 #p-genre-footer .space:after {
   content: ".";
   display: block;
@@ -337,7 +373,7 @@ p {
   visibility: hidden;
 }
 
-/* line 21, ../../compile/scss/pages/_genres.scss */
+/* line 25, ../../compile/scss/pages/_genres.scss */
 .p-genre-footer-link {
   padding: 10px 0;
   float: left;
@@ -346,5 +382,11 @@ p {
 
 /* line 1, ../../compile/scss/pages/_stations.scss */
 body.stations {
+  background-color: white;
+}
+
+/* line 5, ../../compile/scss/pages/_stations.scss */
+#p-stations {
+  height: 100%;
   background-color: white;
 }

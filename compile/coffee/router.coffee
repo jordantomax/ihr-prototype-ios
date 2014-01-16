@@ -25,6 +25,9 @@ class app.Router
       $('.route-' + page).on 'click', ->
         self.switchPages page
 
+    hamburger = new app.header.Hamburger
+    $('.g-app-capital').prepend(hamburger.render())
+
   routes:
     '*genres': 'genres'
 

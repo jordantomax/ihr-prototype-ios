@@ -7,7 +7,7 @@
 
   <body>
     <div class="l-wrapper">
-      <div id="p-genres">
+      <div class="p" id="p-genres">
         <header>
           <img id="p-genre-logo" src="assets/img/logo-genres.png" />
           <h1 class="t-h1 t-white">What do you like to listen to?<br>Select your favorite genres.</h1>
@@ -23,10 +23,9 @@
         </footer>
       </div>
 
-      <div id="p-stations" style="display: none;">
+      <div class="p" id="p-stations" style="display: none;">
         <header class="g-app-header">
           <header class="g-app-capital">
-            <a class="g-app-hamburger"></a>
             <div class="g-app-logo"></div>
           </header>
 
@@ -36,26 +35,30 @@
           </header>
         </header>
 
-        <nav class="g-app-tabs">
-          <ul>
-            <li>
+        <div class="g-app-content">
+          <nav class="g-app-tabs">
+            <ul>
+              <li>
               <a>Favorites</a>
-            </li>
+              </li>
 
-            <li>
+              <li>
               <a class="active">Recommended</a>
-            </li>
+              </li>
 
-            <li>
+              <li>
               <a>Perfect For</a>
-            </li>
-          </ul>
-        </nav>
+              </li>
+            </ul>
+          </nav>
 
-        <ul id="m-station-rows"></ul>
+          <ul id="m-station-rows"></ul>
+        </div>
 
         <a class="ui-btn-bottom route-genres">Improve Recommendations</a>
       </div>
+
+      <div class="g-app-drawer"></div>
     </div>
 
     <script type="text/javascript" src="assets/js/all.js"></script>

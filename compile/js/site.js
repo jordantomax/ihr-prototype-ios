@@ -1,6 +1,8 @@
 (function() {
   window.app = {};
 
+  window.app.header = {};
+
 }).call(this);
 
 (function() {
@@ -103,6 +105,48 @@
       genres: ["r-b", "alternative", "rock"]
     }
   ];
+
+}).call(this);
+
+(function() {
+  var _ref,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  app.header.Hamburger = (function(_super) {
+    __extends(Hamburger, _super);
+
+    function Hamburger() {
+      _ref = Hamburger.__super__.constructor.apply(this, arguments);
+      return _ref;
+    }
+
+    Hamburger.prototype.tagName = 'a';
+
+    Hamburger.prototype.className = 'g-app-hamburger';
+
+    Hamburger.prototype.initialize = function() {};
+
+    Hamburger.prototype.render = function() {
+      return this.el;
+    };
+
+    Hamburger.prototype.events = {
+      'click': 'slideDrawer'
+    };
+
+    Hamburger.prototype.slideDrawer = function() {
+      var width;
+      width = $('.p').width() - 50;
+      console.log($('.p').is(':visible'));
+      return $('.p:visible').animate({
+        marginLeft: width
+      });
+    };
+
+    return Hamburger;
+
+  })(Backbone.View);
 
 }).call(this);
 
@@ -242,7 +286,7 @@
 (function() {
   app.Router = (function() {
     function Router() {
-      var self;
+      var hamburger, self;
       self = this;
       $(document).on('click', "a[href^='/']", function(event) {
         var data, href, url;
@@ -264,6 +308,8 @@
           return self.switchPages(page);
         });
       });
+      hamburger = new app.header.Hamburger;
+      $('.g-app-capital').prepend(hamburger.render());
     }
 
     Router.prototype.routes = {
