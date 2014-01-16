@@ -13,6 +13,7 @@ class app.header.Hamburger extends Backbone.View
     width = $('.p').width() - 50
     console.log $('.p').is(':visible')
 
+    $('.g-app-drawer').css('display', 'block')
     $('.p:visible').animate(
       marginLeft: width
     )
