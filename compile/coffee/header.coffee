@@ -10,13 +10,4 @@ class app.header.Hamburger extends Backbone.View
     'click': 'slideDrawer'
 
   slideDrawer: ->
-    width = $('.p').width() - 50
-    console.log $('.p').is(':visible')
-
-    $('.g-app-drawer').css('display', 'block')
-    $('.p:visible').animate(
-      marginLeft: width
-    )
-
-
-
+    $('.p:visible').toggleClass('drawer-open')

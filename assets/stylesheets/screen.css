@@ -22,7 +22,9 @@ body {
   margin: 0 auto;
   position: relative;
   width: 320px;
-  min-height: 470px;
+  height: 470px;
+  overflow-y: scroll;
+  overflow: hidden;
 }
 
 /* line 1, ../../compile/scss/common/_base.scss */
@@ -89,18 +91,17 @@ p {
 .g-app-header {
   color: white;
   background-color: #900e1a;
-  position: fixed;
-  width: 320px;
+  position: absolute;
   margin: 0 auto;
 }
 
-/* line 8, ../../compile/scss/common/_global.scss */
+/* line 7, ../../compile/scss/common/_global.scss */
 .g-app-capital {
   padding: 13px 0;
   border-bottom: 1px solid #6d0710;
 }
 
-/* line 13, ../../compile/scss/common/_global.scss */
+/* line 12, ../../compile/scss/common/_global.scss */
 .g-app-hamburger {
   display: block;
   background-image: url("../img/hamburger.png");
@@ -111,7 +112,7 @@ p {
   height: 15px;
 }
 
-/* line 22, ../../compile/scss/common/_global.scss */
+/* line 21, ../../compile/scss/common/_global.scss */
 .g-app-logo {
   margin: 0 auto;
   background-image: url("../img/logo.png");
@@ -120,7 +121,7 @@ p {
   height: 20px;
 }
 
-/* line 29, ../../compile/scss/common/_global.scss */
+/* line 28, ../../compile/scss/common/_global.scss */
 .g-app-search {
   padding: 0 5px 6px;
   font-size: 14px;
@@ -128,12 +129,12 @@ p {
   text-align: center;
 }
 
-/* line 36, ../../compile/scss/common/_global.scss */
+/* line 35, ../../compile/scss/common/_global.scss */
 .g-app-search-title {
   margin: 0;
 }
 
-/* line 40, ../../compile/scss/common/_global.scss */
+/* line 39, ../../compile/scss/common/_global.scss */
 .g-app-search-input {
   display: block;
   width: 100%;
@@ -147,7 +148,7 @@ p {
   font-size: 13px;
 }
 
-/* line 51, ../../compile/scss/common/_global.scss */
+/* line 50, ../../compile/scss/common/_global.scss */
 .g-app-tabs {
   min-height: 1px;
   font-size: 15px;
@@ -155,7 +156,7 @@ p {
   border-bottom: 1px solid #900e1a;
   text-align: center;
 }
-/* line 9, ../../compile/scss/common/_mixins.scss */
+/* line 10, ../../compile/scss/common/_mixins.scss */
 .g-app-tabs:after {
   content: ".";
   display: block;
@@ -165,27 +166,33 @@ p {
   clear: both;
   visibility: hidden;
 }
-/* line 58, ../../compile/scss/common/_global.scss */
+/* line 57, ../../compile/scss/common/_global.scss */
 .g-app-tabs li {
   float: left;
 }
 
-/* line 63, ../../compile/scss/common/_global.scss */
+/* line 62, ../../compile/scss/common/_global.scss */
 .g-app-content {
   padding-top: 112px;
 }
 
-/* line 67, ../../compile/scss/common/_global.scss */
+/* line 66, ../../compile/scss/common/_global.scss */
 .g-app-drawer {
   width: 320px;
-  min-height: 470px;
+  height: 470px;
+  overflow-y: scroll;
   position: fixed;
   left: 50%;
   margin-left: -160px;
   top: 0;
+  z-index: 9;
+}
+
+/* line 75, ../../compile/scss/common/_global.scss */
+.g-app-drawer-content {
+  height: 548px;
   background-image: url("../img/drawer.jpg");
   background-size: 320px, 548px;
-  z-index: 9;
 }
 
 /* line 1, ../../compile/scss/common/_ui.scss */
@@ -205,9 +212,9 @@ p {
 
 /* line 11, ../../compile/scss/common/_ui.scss */
 .ui-btn-bottom {
+  position: absolute;
   background-color: #62034b;
   color: white;
-  position: fixed;
   bottom: 10px;
   left: 10px;
   right: 10px;
@@ -219,7 +226,7 @@ p {
   min-height: 1px;
   padding: 0 15px;
 }
-/* line 9, ../../compile/scss/common/_mixins.scss */
+/* line 10, ../../compile/scss/common/_mixins.scss */
 .m-genre-tiles:after {
   content: ".";
   display: block;
@@ -332,22 +339,30 @@ p {
   z-index: 10;
   position: relative;
   width: 320px;
-  min-height: 470px;
+  height: 470px;
+  overflow-y: scroll;
+  -webkit-transition: margin-left 0.15s ease-in-out;
+  -moz-transition: margin-left 0.15s ease-in-out;
+  -o-transition: margin-left 0.15s ease-in-out;
+  transition: margin-left 0.15s ease-in-out;
+}
+/* line 7, ../../compile/scss/pages/_all.scss */
+.p.drawer-open {
+  margin-left: 270px;
 }
 
 /* line 1, ../../compile/scss/pages/_genres.scss */
 #p-genres {
   background-color: #900e1a;
-  padding-top: 35px;
 }
 
-/* line 5, ../../compile/scss/pages/_genres.scss */
+/* line 4, ../../compile/scss/pages/_genres.scss */
 #p-genre-logo {
-  margin: 0 auto 30px;
+  margin: 35px auto 30px;
   display: block;
 }
 
-/* line 10, ../../compile/scss/pages/_genres.scss */
+/* line 9, ../../compile/scss/pages/_genres.scss */
 #p-genre-footer {
   position: fixed;
   z-index: 11;
@@ -357,12 +372,12 @@ p {
   font-size: 18px;
   background-color: rgba(255, 255, 255, 0.9);
 }
-/* line 19, ../../compile/scss/pages/_genres.scss */
+/* line 18, ../../compile/scss/pages/_genres.scss */
 #p-genre-footer .space {
   padding: 15px;
   min-height: 1px;
 }
-/* line 9, ../../compile/scss/common/_mixins.scss */
+/* line 10, ../../compile/scss/common/_mixins.scss */
 #p-genre-footer .space:after {
   content: ".";
   display: block;
@@ -373,7 +388,7 @@ p {
   visibility: hidden;
 }
 
-/* line 25, ../../compile/scss/pages/_genres.scss */
+/* line 24, ../../compile/scss/pages/_genres.scss */
 .p-genre-footer-link {
   padding: 10px 0;
   float: left;

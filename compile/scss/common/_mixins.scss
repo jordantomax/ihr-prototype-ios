@@ -1,6 +1,7 @@
 @mixin device-size {
   width: $device-width;
-  min-height: $device-height;
+  height: $device-height;
+  overflow-y: scroll;
 }
 
 @mixin group {
