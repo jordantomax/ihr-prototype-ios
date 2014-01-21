@@ -176,6 +176,8 @@
 
     Genres.prototype.model = app.Genre;
 
+    Genres.prototype.url = 'http://apistage.ccrd.clearchannel.com/api/v2/content/genre?offset=0&limit=10&sortBy=sort&showHidden=false';
+
     return Genres;
 
   })(Backbone.Collection);
@@ -328,43 +330,82 @@
     Router.prototype.genres = function() {
       var self;
       self = this;
+      $('#go-to-stations').on('click', function() {
+        var selectedGenres;
+        selectedGenres = [];
+        app.genres.each(function(model) {
+          if (model.get('checked') === true) {
+            return selectedGenres.push(model);
+          }
+        });
+        return self.stations(selectedGenres);
+      });
       if (!app.genres) {
         app.genres = new app.Genres;
-        app.genres.reset(genresData);
-        app.genres.each(function(model) {
-          var genreTile;
-          genreTile = new app.GenreTile({
-            model: model
-          });
-          return $('#genres').append(genreTile.render());
-        });
-        return $('#go-to-stations').on('click', function() {
-          var selectedGenres;
-          selectedGenres = [];
-          app.genres.each(function(model) {
-            if (model.get('checked') === true) {
-              return selectedGenres.push(model.get('formattedName'));
-            }
-          });
-          return self.stations(selectedGenres);
+        return $.ajax({
+          url: "http://apistage.ccrd.clearchannel.com/api/v2/content/genre?offset=0&limit=10&sortBy=sort&showHidden=false",
+          type: "GET",
+          dataType: 'json',
+          success: function(genres) {
+            app.genres.reset(genres.hits);
+            return app.genres.each(function(model) {
+              var genreTile;
+              genreTile = new app.GenreTile({
+                model: model
+              });
+              return $('#genres').append(genreTile.render());
+            });
+          }
         });
       }
     };
 
     Router.prototype.stations = function(selectedGenres) {
-      var selectedStationsData, sortedStationsData, stations;
+      var getUrl, selectedStationsData, sortedStationsData, stations, stationsurl;
       selectedStationsData = [];
       sortedStationsData = [];
-      _.each(stationsData, function(station, i) {
-        var intersection;
-        intersection = _.intersection(station.genres, selectedGenres);
-        if (intersection.length > 0) {
-          station.genreMatches = intersection.length;
-          return selectedStationsData.push(station);
+      stationsurl = 'http://apistage.ccrd.clearchannel.com/api/v2/recs/genre?offset=0&limit=10&template=LRRM,CR,DL';
+      getUrl = {
+        live: function(id) {
+          return 'http://apistage.ccrd.clearchannel.com/api/v2/content/liveStations/' + id;
+        },
+        custom: function(id) {
+          return 'http://apistage.ccrd.clearchannel.com/api/v1/catalog/getArtistByArtistId?artistId=' + id + '&includeBio=true';
         }
+      };
+      _.each(selectedGenres, function(genre) {
+        return stationsurl += '&genreId=' + genre.id;
       });
-      sortedStationsData = _.sortBy(selectedStationsData, function(station) {
-        return -1 * station.genreMatches;
+      $.ajax({
+        url: stationsurl,
+        type: "GET",
+        dataType: 'json',
+        success: function(stationsData) {
+          var stations;
+          _.each(stationsData.values, function(data) {
+            var type;
+            type = data.type === "LRRM" || data.type === "LN" || data.type === "LR" ? 'live' : 'custom';
+            return $.ajax({
+              url: getUrl[type](data.contentId),
+              type: "GET",
+              dataType: 'json',
+              success: function(additionalData) {
+                var stationType;
+                stationType = type === 'live' ? 'hits' : 'artist';
+                return data = _.extend(data, additionalData[stationType][0] !== void 0 ? additionalData[stationType][0] : additionalData[stationType]);
+              }
+            });
+          });
+          $('#m-station-rows').empty();
+          stations = new app.Stations(stationsData.values);
+          return stations.each(function(station) {
+            var stationRow;
+            stationRow = new app.StationRow({
+              model: station
+            });
+            return $('#m-station-rows').append(stationRow.render());
+          });
+        }
       });
       stations = new app.Stations(sortedStationsData);
       $('#m-station-rows').empty();

@@ -75,5 +75,19 @@
 .g-app-drawer-content {
   height: 548px;
   background-image: url($img + 'drawer.jpg');
-  background-size: $device-width, 548px;
+  background-size: 269px, 548px;
+
+  a {
+    $height: 44px;
+    position: absolute;
+    display: block;
+    height: $height;
+    width: 100%;
+
+    @for $i from 1 through 4 {
+      &:nth-child(#{$i}) {
+        top: 289px + ($i - 1)*$height;
+      }
+    }
+  }
 }

@@ -1,4 +1,4 @@
 <div class="space">
-  <img src="{{ src }}">
+  <img src="{{ logo }}">
   <div class="name">{{ name }}</div>
 </div>

@@ -4,6 +4,7 @@ class app.Genre extends Backbone.Model
 
 class app.Genres extends Backbone.Collection
   model: app.Genre
+  url: 'http://apistage.ccrd.clearchannel.com/api/v2/content/genre?offset=0&limit=10&sortBy=sort&showHidden=false'
 
 class app.GenreTile extends Backbone.View
   tagName: 'li'
