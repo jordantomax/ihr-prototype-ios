@@ -347,6 +347,7 @@
           type: "GET",
           dataType: 'json',
           success: function(genres) {
+            console.log(genres);
             app.genres.reset(genres.hits);
             return app.genres.each(function(model) {
               var genreTile;

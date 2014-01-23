@@ -63,6 +63,7 @@ class app.Router
         type: "GET"
         dataType: 'json'
         success: (genres) ->
+          console.log genres
           app.genres.reset genres.hits
 
           app.genres.each (model) ->
