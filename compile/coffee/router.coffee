@@ -63,7 +63,6 @@ class app.Router
         type: "GET"
         dataType: 'json'
         success: (genres) ->
-          console.log genres
           app.genres.reset genres.hits
 
           app.genres.each (model) ->
@@ -92,38 +91,35 @@ class app.Router
       type: "GET"
       dataType: 'json'
       success: (stationsData) ->
+        calls = []
+
         _.each stationsData.values, (data) ->
           type = if data.type == "LRRM" or data.type == "LN" or data.type == "LR" then 'live' else 'custom'
 
-          $.ajax
+          calls.push $.ajax
             url: getUrl[type](data.contentId)
             type: "GET"
             dataType: 'json'
             success: (additionalData) ->
               stationType = if type is 'live' then 'hits' else 'artist'
-              data = _.extend data, if additionalData[stationType][0] isnt undefined then additionalData[stationType][0] else additionalData[stationType]
+              data = _.extend data, if additionalData[stationType] isnt undefined and additionalData[stationType][0] isnt undefined then additionalData[stationType][0] else additionalData[stationType]
+              if data.logo then data.logo = data.logo.replace(/nop\(\)/, 'fit(100, 100)')
+              console.log data.logo
 
+        $.when.apply($, calls).then ->
+          renderStations()
+        , ->
+          renderStations()
 
-        $('#m-station-rows').empty()
+        renderStations = ->
+          $('#m-station-rows').empty()
 
-        stations = new app.Stations stationsData.values
+          stations = new app.Stations stationsData.values
 
-        stations.each (station) ->
-          stationRow = new app.StationRow model: station
-          $('#m-station-rows').append(stationRow.render())
-
-      # beforeSend: (xhr) ->
-      #   xhr.setRequestHeader "Authorize", " Bearer T2R6dFl2MXY4bA=="
-
-    # _.each stationsData, (station, i) ->
-    #   intersection = _.intersection(station.genres, selectedGenres)
-
-    #   if intersection.length > 0
-    #     station.genreMatches = intersection.length
-    #     selectedStationsData.push station
-
-    # sortedStationsData = _.sortBy selectedStationsData, (station) ->
-    #   -1 * station.genreMatches
+          stations.each (station) ->
+            console.log station
+            stationRow = new app.StationRow model: station
+            $('#m-station-rows').append(stationRow.render())
 
     stations = new app.Stations sortedStationsData
     $('#m-station-rows').empty()

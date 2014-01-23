@@ -347,7 +347,6 @@
           type: "GET",
           dataType: 'json',
           success: function(genres) {
-            console.log(genres);
             app.genres.reset(genres.hits);
             return app.genres.each(function(model) {
               var genreTile;
@@ -382,30 +381,44 @@
         type: "GET",
         dataType: 'json',
         success: function(stationsData) {
-          var stations;
+          var calls, renderStations;
+          calls = [];
           _.each(stationsData.values, function(data) {
             var type;
             type = data.type === "LRRM" || data.type === "LN" || data.type === "LR" ? 'live' : 'custom';
-            return $.ajax({
+            return calls.push($.ajax({
               url: getUrl[type](data.contentId),
               type: "GET",
               dataType: 'json',
               success: function(additionalData) {
                 var stationType;
                 stationType = type === 'live' ? 'hits' : 'artist';
-                return data = _.extend(data, additionalData[stationType][0] !== void 0 ? additionalData[stationType][0] : additionalData[stationType]);
+                data = _.extend(data, additionalData[stationType] !== void 0 && additionalData[stationType][0] !== void 0 ? additionalData[stationType][0] : additionalData[stationType]);
+                if (data.logo) {
+                  data.logo = data.logo.replace(/nop\(\)/, 'fit(100, 100)');
+                }
+                return console.log(data.logo);
               }
-            });
+            }));
           });
-          $('#m-station-rows').empty();
-          stations = new app.Stations(stationsData.values);
-          return stations.each(function(station) {
-            var stationRow;
-            stationRow = new app.StationRow({
-              model: station
-            });
-            return $('#m-station-rows').append(stationRow.render());
+          $.when.apply($, calls).then(function() {
+            return renderStations();
+          }, function() {
+            return renderStations();
           });
+          return renderStations = function() {
+            var stations;
+            $('#m-station-rows').empty();
+            stations = new app.Stations(stationsData.values);
+            return stations.each(function(station) {
+              var stationRow;
+              console.log(station);
+              stationRow = new app.StationRow({
+                model: station
+              });
+              return $('#m-station-rows').append(stationRow.render());
+            });
+          };
         }
       });
       stations = new app.Stations(sortedStationsData);

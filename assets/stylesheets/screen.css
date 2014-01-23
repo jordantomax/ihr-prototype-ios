@@ -92,16 +92,17 @@ p {
   color: white;
   background-color: #900e1a;
   position: absolute;
+  left: 0;
   margin: 0 auto;
 }
 
-/* line 7, ../../compile/scss/common/_global.scss */
+/* line 8, ../../compile/scss/common/_global.scss */
 .g-app-capital {
   padding: 13px 0;
   border-bottom: 1px solid #6d0710;
 }
 
-/* line 12, ../../compile/scss/common/_global.scss */
+/* line 13, ../../compile/scss/common/_global.scss */
 .g-app-hamburger {
   display: block;
   background-image: url("../img/hamburger.png");
@@ -112,7 +113,7 @@ p {
   height: 15px;
 }
 
-/* line 21, ../../compile/scss/common/_global.scss */
+/* line 22, ../../compile/scss/common/_global.scss */
 .g-app-logo {
   margin: 0 auto;
   background-image: url("../img/logo.png");
@@ -121,7 +122,7 @@ p {
   height: 20px;
 }
 
-/* line 28, ../../compile/scss/common/_global.scss */
+/* line 29, ../../compile/scss/common/_global.scss */
 .g-app-search {
   padding: 0 5px 6px;
   font-size: 14px;
@@ -129,12 +130,12 @@ p {
   text-align: center;
 }
 
-/* line 35, ../../compile/scss/common/_global.scss */
+/* line 36, ../../compile/scss/common/_global.scss */
 .g-app-search-title {
   margin: 0;
 }
 
-/* line 39, ../../compile/scss/common/_global.scss */
+/* line 40, ../../compile/scss/common/_global.scss */
 .g-app-search-input {
   display: block;
   width: 100%;
@@ -148,7 +149,7 @@ p {
   font-size: 13px;
 }
 
-/* line 50, ../../compile/scss/common/_global.scss */
+/* line 51, ../../compile/scss/common/_global.scss */
 .g-app-tabs {
   min-height: 1px;
   font-size: 15px;
@@ -166,17 +167,17 @@ p {
   clear: both;
   visibility: hidden;
 }
-/* line 57, ../../compile/scss/common/_global.scss */
+/* line 58, ../../compile/scss/common/_global.scss */
 .g-app-tabs li {
   float: left;
 }
 
-/* line 62, ../../compile/scss/common/_global.scss */
+/* line 63, ../../compile/scss/common/_global.scss */
 .g-app-content {
   padding-top: 112px;
 }
 
-/* line 66, ../../compile/scss/common/_global.scss */
+/* line 67, ../../compile/scss/common/_global.scss */
 .g-app-drawer {
   width: 320px;
   height: 470px;
@@ -188,32 +189,32 @@ p {
   z-index: 9;
 }
 
-/* line 75, ../../compile/scss/common/_global.scss */
+/* line 76, ../../compile/scss/common/_global.scss */
 .g-app-drawer-content {
   height: 548px;
   background-image: url("../img/drawer.jpg");
   background-size: 269px, 548px;
 }
-/* line 80, ../../compile/scss/common/_global.scss */
+/* line 81, ../../compile/scss/common/_global.scss */
 .g-app-drawer-content a {
   position: absolute;
   display: block;
   height: 44px;
   width: 100%;
 }
-/* line 88, ../../compile/scss/common/_global.scss */
+/* line 89, ../../compile/scss/common/_global.scss */
 .g-app-drawer-content a:nth-child(1) {
   top: 289px;
 }
-/* line 88, ../../compile/scss/common/_global.scss */
+/* line 89, ../../compile/scss/common/_global.scss */
 .g-app-drawer-content a:nth-child(2) {
   top: 333px;
 }
-/* line 88, ../../compile/scss/common/_global.scss */
+/* line 89, ../../compile/scss/common/_global.scss */
 .g-app-drawer-content a:nth-child(3) {
   top: 377px;
 }
-/* line 88, ../../compile/scss/common/_global.scss */
+/* line 89, ../../compile/scss/common/_global.scss */
 .g-app-drawer-content a:nth-child(4) {
   top: 421px;
 }
@@ -235,12 +236,19 @@ p {
 
 /* line 11, ../../compile/scss/common/_ui.scss */
 .ui-btn-bottom {
-  position: absolute;
   background-color: #62034b;
   color: white;
-  bottom: 10px;
-  left: 10px;
-  right: 10px;
+  display: block;
+}
+
+/* line 18, ../../compile/scss/common/_ui.scss */
+.ui-btn-bottom-wrapper {
+  position: fixed;
+  bottom: 0px;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 /* line 1, ../../compile/scss/modules/_genres.scss */
@@ -332,25 +340,29 @@ p {
 /* line 2, ../../compile/scss/modules/_stations.scss */
 #m-station-rows li {
   display: table;
+  padding: 10px 0;
+  border-bottom: 1px solid #dbdbdb;
+  min-height: 50px;
 }
-/* line 6, ../../compile/scss/modules/_stations.scss */
+/* line 9, ../../compile/scss/modules/_stations.scss */
 #m-station-rows .img-wrapper {
   display: table-cell;
-  width: 75px;
+  width: 60px;
+  padding-right: 10px;
   vertical-align: middle;
 }
-/* line 12, ../../compile/scss/modules/_stations.scss */
+/* line 16, ../../compile/scss/modules/_stations.scss */
 #m-station-rows .text-wrapper {
   display: table-cell;
   width: 245px;
   vertical-align: middle;
 }
-/* line 18, ../../compile/scss/modules/_stations.scss */
+/* line 22, ../../compile/scss/modules/_stations.scss */
 #m-station-rows .name {
   font-size: 16px;
   margin-bottom: 0;
 }
-/* line 23, ../../compile/scss/modules/_stations.scss */
+/* line 27, ../../compile/scss/modules/_stations.scss */
 #m-station-rows .tagline {
   font-size: 12px;
   color: #a1a1a1;
@@ -361,9 +373,7 @@ p {
 .p {
   z-index: 10;
   position: relative;
-  width: 320px;
   height: 470px;
-  overflow-y: scroll;
   -webkit-transition: margin-left 0.15s ease-in-out;
   -moz-transition: margin-left 0.15s ease-in-out;
   -o-transition: margin-left 0.15s ease-in-out;
@@ -371,8 +381,10 @@ p {
   -moz-box-shadow: -1px 0 5px rgba(0, 0, 0, 0.35);
   -webkit-box-shadow: -1px 0 5px rgba(0, 0, 0, 0.35);
   box-shadow: -1px 0 5px rgba(0, 0, 0, 0.35);
+  padding: 0 15px;
+  overflow-y: scroll;
 }
-/* line 8, ../../compile/scss/pages/_all.scss */
+/* line 10, ../../compile/scss/pages/_all.scss */
 .p.drawer-open {
   margin-left: 270px;
 }
@@ -380,15 +392,16 @@ p {
 /* line 1, ../../compile/scss/pages/_genres.scss */
 #p-genres {
   background-color: #900e1a;
+  padding-top: 35px;
 }
 
-/* line 4, ../../compile/scss/pages/_genres.scss */
+/* line 5, ../../compile/scss/pages/_genres.scss */
 #p-genre-logo {
-  margin: 35px auto 30px;
+  margin: 0 auto 30px;
   display: block;
 }
 
-/* line 9, ../../compile/scss/pages/_genres.scss */
+/* line 10, ../../compile/scss/pages/_genres.scss */
 #p-genre-footer {
   position: fixed;
   z-index: 11;
@@ -398,7 +411,7 @@ p {
   font-size: 18px;
   background-color: rgba(255, 255, 255, 0.9);
 }
-/* line 18, ../../compile/scss/pages/_genres.scss */
+/* line 19, ../../compile/scss/pages/_genres.scss */
 #p-genre-footer .space {
   padding: 15px;
   min-height: 1px;
@@ -414,7 +427,7 @@ p {
   visibility: hidden;
 }
 
-/* line 24, ../../compile/scss/pages/_genres.scss */
+/* line 25, ../../compile/scss/pages/_genres.scss */
 .p-genre-footer-link {
   padding: 10px 0;
   float: left;

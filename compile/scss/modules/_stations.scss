@@ -1,11 +1,15 @@
 #m-station-rows {
   li {
     display: table;
+    padding: 10px 0;
+    border-bottom: 1px solid #dbdbdb;
+    min-height: 50px;
   }
 
   .img-wrapper {
     display: table-cell;
-    width: 75px;
+    width: 60px;
+    padding-right: 10px;
     vertical-align: middle;
   }
 

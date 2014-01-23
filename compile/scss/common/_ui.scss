@@ -10,10 +10,17 @@
 
 .ui-btn-bottom {
   @extend .ui-btn;
-  position: absolute;
   background-color: $purple;
   color: $white;
-  bottom: 10px;
-  left: 10px;
-  right: 10px;
+  display: block;
+}
+
+.ui-btn-bottom-wrapper {
+  position: fixed;
+  bottom: 0px;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  background-color: rgba($white, 0.8);
+
 }

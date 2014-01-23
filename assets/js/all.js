@@ -3408,18 +3408,18 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 
 
   buffer += "<div class=\"img-wrapper\">\n  <img src=\"";
-  if (stack1 = helpers.imgSrc) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.imgSrc; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  if (stack1 = helpers.logo) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.logo; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
     + "\" />\n</div>\n\n<div class=\"text-wrapper\">\n  <h3 class=\"name\">";
   if (stack1 = helpers.label) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.label; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</h3>\n  <!-- <p class=\"tagline\">";
-  if (stack1 = helpers.tagline) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.tagline; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    + "</h3>\n  <p class=\"tagline\">";
+  if (stack1 = helpers.description) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.description; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</p>-->\n</div>\n";
+    + "</p>\n</div>\n";
   return buffer;
   });;(function() {
   window.app = {};
@@ -3770,7 +3770,6 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
           type: "GET",
           dataType: 'json',
           success: function(genres) {
-            console.log(genres);
             app.genres.reset(genres.hits);
             return app.genres.each(function(model) {
               var genreTile;
@@ -3805,30 +3804,44 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
         type: "GET",
         dataType: 'json',
         success: function(stationsData) {
-          var stations;
+          var calls, renderStations;
+          calls = [];
           _.each(stationsData.values, function(data) {
             var type;
             type = data.type === "LRRM" || data.type === "LN" || data.type === "LR" ? 'live' : 'custom';
-            return $.ajax({
+            return calls.push($.ajax({
               url: getUrl[type](data.contentId),
               type: "GET",
               dataType: 'json',
               success: function(additionalData) {
                 var stationType;
                 stationType = type === 'live' ? 'hits' : 'artist';
-                return data = _.extend(data, additionalData[stationType][0] !== void 0 ? additionalData[stationType][0] : additionalData[stationType]);
+                data = _.extend(data, additionalData[stationType] !== void 0 && additionalData[stationType][0] !== void 0 ? additionalData[stationType][0] : additionalData[stationType]);
+                if (data.logo) {
+                  data.logo = data.logo.replace(/nop\(\)/, 'fit(100, 100)');
+                }
+                return console.log(data.logo);
               }
-            });
+            }));
           });
-          $('#m-station-rows').empty();
-          stations = new app.Stations(stationsData.values);
-          return stations.each(function(station) {
-            var stationRow;
-            stationRow = new app.StationRow({
-              model: station
-            });
-            return $('#m-station-rows').append(stationRow.render());
+          $.when.apply($, calls).then(function() {
+            return renderStations();
+          }, function() {
+            return renderStations();
           });
+          return renderStations = function() {
+            var stations;
+            $('#m-station-rows').empty();
+            stations = new app.Stations(stationsData.values);
+            return stations.each(function(station) {
+              var stationRow;
+              console.log(station);
+              stationRow = new app.StationRow({
+                model: station
+              });
+              return $('#m-station-rows').append(stationRow.render());
+            });
+          };
         }
       });
       stations = new app.Stations(sortedStationsData);
