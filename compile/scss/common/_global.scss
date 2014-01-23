@@ -3,6 +3,7 @@
   background-color: $red;
   position: absolute;
   left: 0;
+  right: 0;
   margin: 0 auto;
 }
 .g-app-capital {
@@ -54,14 +55,25 @@
   line-height: 44px;
   border-bottom: 1px solid $red;
   text-align: center;
+  margin-bottom: -6px;
 
   li {
-    float: left;
+    display: inline;
+  }
+
+  a {
+    display: inline;
+    padding: 10px 7px;
+
+    &.active {
+      border-bottom: 3px solid $red;
+    }
   }
 }
 
 .g-app-content {
-  padding-top: 112px;
+  padding-top: 122px;
+  margin: 0 -15px;
 }
 
 .g-app-drawer {

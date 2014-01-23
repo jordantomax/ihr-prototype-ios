@@ -362,6 +362,9 @@
 
     Router.prototype.stations = function(selectedGenres) {
       var getUrl, selectedStationsData, sortedStationsData, stations, stationsurl;
+      if (selectedGenres.length > 0) {
+        $('#js-improve-recommendations').hide();
+      }
       selectedStationsData = [];
       sortedStationsData = [];
       stationsurl = 'http://apistage.ccrd.clearchannel.com/api/v2/recs/genre?offset=0&limit=10&template=LRRM,CR,DL';
@@ -395,9 +398,8 @@
                 stationType = type === 'live' ? 'hits' : 'artist';
                 data = _.extend(data, additionalData[stationType] !== void 0 && additionalData[stationType][0] !== void 0 ? additionalData[stationType][0] : additionalData[stationType]);
                 if (data.logo) {
-                  data.logo = data.logo.replace(/nop\(\)/, 'fit(100, 100)');
+                  return data.logo = data.logo.replace(/nop\(\)/, 'fit(100, 100)');
                 }
-                return console.log(data.logo);
               }
             }));
           });
@@ -412,7 +414,6 @@
             stations = new app.Stations(stationsData.values);
             return stations.each(function(station) {
               var stationRow;
-              console.log(station);
               stationRow = new app.StationRow({
                 model: station
               });

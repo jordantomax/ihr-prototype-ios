@@ -69,10 +69,10 @@ class app.Router
             genreTile = new app.GenreTile model: model
             $('#genres').append(genreTile.render())
 
-        # beforeSend: (xhr) ->
-        #   xhr.setRequestHeader "Authorize", " Bearer T2R6dFl2MXY4bA=="
-
   stations: (selectedGenres) ->
+    if selectedGenres.length > 0
+      $('#js-improve-recommendations').hide()
+
     selectedStationsData = []
     sortedStationsData = []
     stationsurl = 'http://apistage.ccrd.clearchannel.com/api/v2/recs/genre?offset=0&limit=10&template=LRRM,CR,DL'
@@ -104,7 +104,6 @@ class app.Router
               stationType = if type is 'live' then 'hits' else 'artist'
               data = _.extend data, if additionalData[stationType] isnt undefined and additionalData[stationType][0] isnt undefined then additionalData[stationType][0] else additionalData[stationType]
               if data.logo then data.logo = data.logo.replace(/nop\(\)/, 'fit(100, 100)')
-              console.log data.logo
 
         $.when.apply($, calls).then ->
           renderStations()
@@ -117,7 +116,6 @@ class app.Router
           stations = new app.Stations stationsData.values
 
           stations.each (station) ->
-            console.log station
             stationRow = new app.StationRow model: station
             $('#m-station-rows').append(stationRow.render())
 

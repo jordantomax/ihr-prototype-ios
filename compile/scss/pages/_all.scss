@@ -1,11 +1,13 @@
 .p {
   z-index: 10;
   position: relative;
-  height: $device-height;
+  @include device-size;
+  width: $device-width - $page-padding*2;
   @include transition(margin-left);
   @include box-shadow(-1px, 0, 5px, rgba($black, 0.35));
-  padding: 0 15px;
-  overflow-y: scroll;
+  padding: 0 $page-padding;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
 
   &.drawer-open {
     margin-left: $device-width - 50;

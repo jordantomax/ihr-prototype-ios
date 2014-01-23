@@ -22,7 +22,7 @@ body {
   margin: 0 auto;
   position: relative;
   width: 320px;
-  height: 470px;
+  height: 550px;
   overflow-y: scroll;
   overflow: hidden;
 }
@@ -93,16 +93,17 @@ p {
   background-color: #900e1a;
   position: absolute;
   left: 0;
+  right: 0;
   margin: 0 auto;
 }
 
-/* line 8, ../../compile/scss/common/_global.scss */
+/* line 9, ../../compile/scss/common/_global.scss */
 .g-app-capital {
   padding: 13px 0;
   border-bottom: 1px solid #6d0710;
 }
 
-/* line 13, ../../compile/scss/common/_global.scss */
+/* line 14, ../../compile/scss/common/_global.scss */
 .g-app-hamburger {
   display: block;
   background-image: url("../img/hamburger.png");
@@ -113,7 +114,7 @@ p {
   height: 15px;
 }
 
-/* line 22, ../../compile/scss/common/_global.scss */
+/* line 23, ../../compile/scss/common/_global.scss */
 .g-app-logo {
   margin: 0 auto;
   background-image: url("../img/logo.png");
@@ -122,7 +123,7 @@ p {
   height: 20px;
 }
 
-/* line 29, ../../compile/scss/common/_global.scss */
+/* line 30, ../../compile/scss/common/_global.scss */
 .g-app-search {
   padding: 0 5px 6px;
   font-size: 14px;
@@ -130,12 +131,12 @@ p {
   text-align: center;
 }
 
-/* line 36, ../../compile/scss/common/_global.scss */
+/* line 37, ../../compile/scss/common/_global.scss */
 .g-app-search-title {
   margin: 0;
 }
 
-/* line 40, ../../compile/scss/common/_global.scss */
+/* line 41, ../../compile/scss/common/_global.scss */
 .g-app-search-input {
   display: block;
   width: 100%;
@@ -149,13 +150,14 @@ p {
   font-size: 13px;
 }
 
-/* line 51, ../../compile/scss/common/_global.scss */
+/* line 52, ../../compile/scss/common/_global.scss */
 .g-app-tabs {
   min-height: 1px;
   font-size: 15px;
   line-height: 44px;
   border-bottom: 1px solid #900e1a;
   text-align: center;
+  margin-bottom: -6px;
 }
 /* line 10, ../../compile/scss/common/_mixins.scss */
 .g-app-tabs:after {
@@ -167,20 +169,30 @@ p {
   clear: both;
   visibility: hidden;
 }
-/* line 58, ../../compile/scss/common/_global.scss */
+/* line 60, ../../compile/scss/common/_global.scss */
 .g-app-tabs li {
-  float: left;
+  display: inline;
+}
+/* line 64, ../../compile/scss/common/_global.scss */
+.g-app-tabs a {
+  display: inline;
+  padding: 10px 7px;
+}
+/* line 68, ../../compile/scss/common/_global.scss */
+.g-app-tabs a.active {
+  border-bottom: 3px solid #900e1a;
 }
 
-/* line 63, ../../compile/scss/common/_global.scss */
+/* line 74, ../../compile/scss/common/_global.scss */
 .g-app-content {
-  padding-top: 112px;
+  padding-top: 122px;
+  margin: 0 -15px;
 }
 
-/* line 67, ../../compile/scss/common/_global.scss */
+/* line 79, ../../compile/scss/common/_global.scss */
 .g-app-drawer {
   width: 320px;
-  height: 470px;
+  height: 550px;
   overflow-y: scroll;
   position: fixed;
   left: 50%;
@@ -189,32 +201,32 @@ p {
   z-index: 9;
 }
 
-/* line 76, ../../compile/scss/common/_global.scss */
+/* line 88, ../../compile/scss/common/_global.scss */
 .g-app-drawer-content {
   height: 548px;
   background-image: url("../img/drawer.jpg");
   background-size: 269px, 548px;
 }
-/* line 81, ../../compile/scss/common/_global.scss */
+/* line 93, ../../compile/scss/common/_global.scss */
 .g-app-drawer-content a {
   position: absolute;
   display: block;
   height: 44px;
   width: 100%;
 }
-/* line 89, ../../compile/scss/common/_global.scss */
+/* line 101, ../../compile/scss/common/_global.scss */
 .g-app-drawer-content a:nth-child(1) {
   top: 289px;
 }
-/* line 89, ../../compile/scss/common/_global.scss */
+/* line 101, ../../compile/scss/common/_global.scss */
 .g-app-drawer-content a:nth-child(2) {
   top: 333px;
 }
-/* line 89, ../../compile/scss/common/_global.scss */
+/* line 101, ../../compile/scss/common/_global.scss */
 .g-app-drawer-content a:nth-child(3) {
   top: 377px;
 }
-/* line 89, ../../compile/scss/common/_global.scss */
+/* line 101, ../../compile/scss/common/_global.scss */
 .g-app-drawer-content a:nth-child(4) {
   top: 421px;
 }
@@ -284,8 +296,9 @@ p {
   float: left;
   width: 50%;
   position: relative;
+  height: 64px;
 }
-/* line 29, ../../compile/scss/modules/_genres.scss */
+/* line 30, ../../compile/scss/modules/_genres.scss */
 .m-genre-tiles li:before {
   content: '';
   position: absolute;
@@ -311,14 +324,14 @@ p {
   transition: opacity 0.15s ease-in-out;
   z-index: 10;
 }
-/* line 51, ../../compile/scss/modules/_genres.scss */
+/* line 52, ../../compile/scss/modules/_genres.scss */
 .m-genre-tiles .space {
   margin: 10px;
   margin-top: 0;
   margin-right: 0;
   position: relative;
 }
-/* line 59, ../../compile/scss/modules/_genres.scss */
+/* line 60, ../../compile/scss/modules/_genres.scss */
 .m-genre-tiles .name {
   position: absolute;
   color: #fff;
@@ -328,7 +341,7 @@ p {
   text-transform: capitalize;
   font-weight: 100;
 }
-/* line 69, ../../compile/scss/modules/_genres.scss */
+/* line 70, ../../compile/scss/modules/_genres.scss */
 .m-genre-tiles img {
   display: block;
   -webkit-transition: opacity 0.15s ease-in-out;
@@ -373,7 +386,10 @@ p {
 .p {
   z-index: 10;
   position: relative;
-  height: 470px;
+  width: 320px;
+  height: 550px;
+  overflow-y: scroll;
+  width: 290px;
   -webkit-transition: margin-left 0.15s ease-in-out;
   -moz-transition: margin-left 0.15s ease-in-out;
   -o-transition: margin-left 0.15s ease-in-out;
@@ -382,9 +398,10 @@ p {
   -webkit-box-shadow: -1px 0 5px rgba(0, 0, 0, 0.35);
   box-shadow: -1px 0 5px rgba(0, 0, 0, 0.35);
   padding: 0 15px;
-  overflow-y: scroll;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
 }
-/* line 10, ../../compile/scss/pages/_all.scss */
+/* line 12, ../../compile/scss/pages/_all.scss */
 .p.drawer-open {
   margin-left: 270px;
 }
