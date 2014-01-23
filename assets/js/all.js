@@ -3559,7 +3559,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     };
 
     Hamburger.prototype.slideDrawer = function() {
-      return $('.p:visible').toggleClass('drawer-open');
+      return $('body').toggleClass('drawer-open');
     };
 
     return Hamburger;

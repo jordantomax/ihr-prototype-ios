@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link type="text/css" href="assets/stylesheets/screen.css?version-4" media="screen" rel="stylesheet">
+    <link type="text/css" href="assets/stylesheets/screen.css?version-9" media="screen" rel="stylesheet">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   </head>
 
   <body>
     <div class="l-wrapper">
       <div class="p" id="p-genres">
-        <header>
-          <img id="p-genre-logo" src="assets/img/logo-genres.png" />
-          <h1 class="t-h1 t-white">What do you like to listen to?<br>Select your favorite genres.</h1>
-        </header>
+        <div id="p-genres-content">
+          <header>
+            <img id="p-genre-logo" src="assets/img/logo-genres.png" />
+            <h1 class="t-h1 t-white">What do you like to listen to?<br>Select your favorite genres.</h1>
+          </header>
 
-        <ul class="m-genre-tiles" id="genres"></ul>
+          <ul class="m-genre-tiles" id="genres"></ul>
 
-        <footer id="p-genre-footer">
-          <div class="space">
-            <a class="p-genre-footer-link">Sign In</a>
-            <a class="ui-btn p-right" id="go-to-stations">Continue</a>
-          </div>
-        </footer>
+          <footer id="p-genre-footer">
+            <div class="space">
+              <a class="p-genre-footer-link">Sign In</a>
+              <a class="ui-btn p-right" id="go-to-stations">Continue</a>
+            </div>
+          </footer>
+        </div>
       </div>
 
       <div class="p" id="p-stations" style="display: none;">
@@ -36,7 +38,7 @@
           </header>
         </header>
 
-        <div class="g-app-content">
+        <div class="g-app-content m-scrollable">
           <nav class="g-app-tabs">
             <ul>
               <li>
@@ -56,7 +58,7 @@
           <ul id="m-station-rows"></ul>
         </div>
 
-        <footer class="ui-btn-bottom-wrapper" id="js-improve-recommendations">
+        <footer class="ui-btn-bottom-wrapper g-footer" id="js-improve-recommendations">
           <a class="ui-btn-bottom route-genres">Improve Recommendations</a>
         </footer>
       </div>

@@ -1,11 +1,22 @@
 .g-app-header {
   color: $white;
   background-color: $red;
-  position: absolute;
-  left: 0;
-  right: 0;
+  position: fixed;
+  width: $device-width;
   margin: 0 auto;
+  z-index: 11;
+  @include transition(left);
 }
+
+body {
+  &.drawer-open {
+    .g-app-header,
+    .g-footer {
+      left: $device-width - 50;
+    }
+  }
+}
+
 .g-app-capital {
   padding: 13px 0;
   border-bottom: 1px solid #6d0710;
@@ -36,6 +47,7 @@
 
 .g-app-search-title {
   margin: 0;
+  white-space: nowrap;
 }
 
 .g-app-search-input {
@@ -73,7 +85,6 @@
 
 .g-app-content {
   padding-top: 122px;
-  margin: 0 -15px;
 }
 
 .g-app-drawer {

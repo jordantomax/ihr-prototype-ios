@@ -136,7 +136,7 @@
     };
 
     Hamburger.prototype.slideDrawer = function() {
-      return $('.p:visible').toggleClass('drawer-open');
+      return $('body').toggleClass('drawer-open');
     };
 
     return Hamburger;

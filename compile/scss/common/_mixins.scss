@@ -1,7 +1,10 @@
 @mixin device-size {
   width: $device-width;
   height: $device-height;
-  overflow-y: scroll;
+}
+
+@mixin drawer-content {
+  margin-left: $device-width - 50;
 }
 
 @mixin group {

@@ -10,4 +10,4 @@ class app.header.Hamburger extends Backbone.View
     'click': 'slideDrawer'
 
   slideDrawer: ->
-    $('.p:visible').toggleClass('drawer-open')
+    $('body').toggleClass('drawer-open')
